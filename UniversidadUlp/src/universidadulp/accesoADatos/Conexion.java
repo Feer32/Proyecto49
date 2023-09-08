@@ -7,7 +7,11 @@ import javax.swing.JOptionPane;
 
 public class Conexion {
 
-   
+    private static final String URL = "jdbc: mariadb://localhost:3306/";
+    private static final String DB = "universidadulp";
+    private static final String USUARIO = "root";
+    private static final String PASSWORD = "";
+
     private static Connection connection;
 
     private Conexion() {
@@ -20,12 +24,7 @@ public class Conexion {
             try {
                 Class.forName("org.mariadb.jdbc.Driver");
 
-                String URL = "jdbc: mariadb://localhost:3306/";
-                String DB = "universidadulp";
-                String USUARIO = "root";
-                String PASSWORD = "";
-
-                connection = DriverManager.getConnection(URL + DB, USUARIO, PASSWORD );
+                connection = DriverManager.getConnection(URL + DB, USUARIO, PASSWORD);
 
             } catch (ClassNotFoundException e) {
                 JOptionPane.showMessageDialog(null, "Debe agregar un driver");

@@ -1,18 +1,16 @@
-
 package universidadulp.Entidades;
 
 import java.time.LocalDate;
 
 
 public class Alumno {
-   
+
     private int idAlumno;
     private int dni;
     private String apellido;
     private String nombre;
     private LocalDate fechaNac;
     private boolean estado;
-  
 
     public Alumno() {
     }
@@ -32,6 +30,14 @@ public class Alumno {
         this.nombre = nombre;
         this.fechaNac = fechaNac;
         this.estado = estado;
+    }
+
+    public LocalDate getFechaNac() {
+        return fechaNac;
+    }
+
+    public void setFechaNac(LocalDate fechaNac) {
+        this.fechaNac = fechaNac;
     }
 
     public int getIdAlumno() {
@@ -66,14 +72,6 @@ public class Alumno {
         this.nombre = nombre;
     }
 
-    public LocalDate getFechaNac() {
-        return fechaNac;
-    }
-
-    public void setFechaNac(LocalDate fechaNac) {
-        this.fechaNac = fechaNac;
-    }
-
     public boolean isEstado() {
         return estado;
     }
@@ -84,9 +82,7 @@ public class Alumno {
 
     @Override
     public String toString() {
-        return "Alumno{" + "idAlumno=" + idAlumno + ", dni=" + dni + ", apellido=" + apellido + ", nombre=" + nombre + '}';
+        return "Alumno{" + "idAlumno=" + idAlumno + ", dni=" + dni + ", apellido=" + apellido + ", nombre=" + nombre + ", fechaNac=" + fechaNac + ", estado=" + estado + '}';
     }
-    
-    
-    
+
 }

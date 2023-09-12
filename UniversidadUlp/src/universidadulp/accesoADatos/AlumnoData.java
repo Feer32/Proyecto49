@@ -30,6 +30,7 @@ public class AlumnoData {
             ps.setString(3, alumno.getNombre());
             ps.setDate(4, Date.valueOf(alumno.getFechaNac()));
             ps.setBoolean(5, alumno.isEstado());
+            ps.executeUpdate();
             ResultSet resultado = ps.getGeneratedKeys();
             if (resultado.next()) {
                 alumno.setIdAlumno(resultado.getInt(1));
@@ -43,21 +44,21 @@ public class AlumnoData {
 
     public Alumno buscarAlumnoPorId(int id) {
         Alumno alumno = null;
-        String sql = "SELECT `dni`, `apellido`, `nombre`, `fechaNacimiento' FROM `alumno` WHERE idAlumno=? AND estado=1";
+        String sql = "SELECT dni, apellido, nombre, fechaNacimiento FROM alumno WHERE idAlumno=? AND estado=1";
         PreparedStatement ps = null;
         try {
             ps = conexion.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet resultado = ps.executeQuery();
             if (resultado.next()) {
-                alumno = new Alumno();
+               alumno = new Alumno();
                 alumno.setIdAlumno(id);
                 alumno.setDni(resultado.getInt("dni"));
                 alumno.setApellido(resultado.getString("apellido"));
                 alumno.setNombre(resultado.getString("nombre"));
                 alumno.setFechaNac(resultado.getDate("fechaNacimiento").toLocalDate());
                 alumno.setEstado(true);
-
+          
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el alumno");
             }
@@ -152,6 +153,23 @@ public class AlumnoData {
 
         try {
             String sql = "UPDATE alumno SET estado = 0 WHERE idAlumno = ? ";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, id);
+            int fila = ps.executeUpdate();
+
+            if (fila == 1) {
+                JOptionPane.showMessageDialog(null, " Se eliminó el alumno.");
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno");
+        }
+    }
+    
+      public void eliminarAlumnoDelete(int id) {
+
+        try {
+            String sql = "DELETE FROM `alumno` WHERE idAlumno = ? ";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, id);
             int fila = ps.executeUpdate();

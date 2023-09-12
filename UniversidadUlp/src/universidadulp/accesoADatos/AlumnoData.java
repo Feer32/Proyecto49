@@ -149,7 +149,7 @@ public class AlumnoData {
         }
     }
 
-    public void eliminarAlumno(int id) {
+    public void bajarAlumno(int id) {
 
         try {
             String sql = "UPDATE alumno SET estado = 0 WHERE idAlumno = ? ";
@@ -158,7 +158,7 @@ public class AlumnoData {
             int fila = ps.executeUpdate();
 
             if (fila == 1) {
-                JOptionPane.showMessageDialog(null, " Se eliminó el alumno.");
+                JOptionPane.showMessageDialog(null, " Se Cambio el estado del alumno.");
             }
             ps.close();
         } catch (SQLException e) {
@@ -166,7 +166,7 @@ public class AlumnoData {
         }
     }
     
-      public void eliminarAlumnoDelete(int id) {
+      public void eliminarAlumno(int id) {
 
         try {
             String sql = "DELETE FROM `alumno` WHERE idAlumno = ? ";

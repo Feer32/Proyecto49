@@ -22,7 +22,7 @@ public class MateriaData {
     }
 
     public void guardarMateria(Materia materia) throws SQLException {
-        String sql = "INSERT INTO 'materia' ('nombre', 'anio', 'activo')" + "VALUES (?,?,?)";
+        String sql = "INSERT INTO materia (nombre, año, activo) VALUES (?,?,?)";
 
         try {
             PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

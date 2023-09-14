@@ -217,8 +217,8 @@ public class InscripcionData {
     public List<Alumno> obtenerAlumnosXMateria(int idMateria){
         
         ArrayList<Alumno> alumnosMateria = new ArrayList<>();
-        String sql = "SELECT alumno.idAlumno, dni, nombre, apellido, fechaNacimiento, estado" +
-                "FROM inscripcion, alumno WHERE inscripcion.idAlumno = alumno.idAlumno and" +
+        String sql = "SELECT alumno.idAlumno, dni, nombre, apellido, fechaNacimiento, estado " +
+                "FROM inscripcion, alumno WHERE inscripcion.idAlumno = alumno.idAlumno and " +
                 "idMateria = ? and alumno.estado = 1";
         
          try {
@@ -246,23 +246,23 @@ public class InscripcionData {
         return alumnosMateria;
     }
     
-    public void darBajaInscripcionMateriaAlumno(int idAlumno, int idMateria) {
-
-        try {
-            String sql = "UPDATE inscripcion SET estado = 0 WHERE idAlumno = ? and idMateria = ?";
-            PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setInt(1, idAlumno);
-            ps.setInt(2, idMateria);
-            int fila = ps.executeUpdate();
-
-            if (fila == 1) {
-                JOptionPane.showMessageDialog(null, " Se Cambio el estado de la inscripcion del alumno.");
-            }
-            ps.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla inscripción");
-        }
-    }
+//    public void darBajaInscripcionMateriaAlumno(int idAlumno, int idMateria) {
+//
+//        try {
+//            String sql = "UPDATE inscripcion SET estado = 0 WHERE idAlumno = ? and idMateria = ?";
+//            PreparedStatement ps = conexion.prepareStatement(sql);
+//            ps.setInt(1, idAlumno);
+//            ps.setInt(2, idMateria);
+//            int fila = ps.executeUpdate();
+//
+//            if (fila == 1) {
+//                JOptionPane.showMessageDialog(null, " Se Cambio el estado de la inscripcion del alumno.");
+//            }
+//            ps.close();
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla inscripción");
+//        }
+//    }
     
     public void eliminarInscripcionMateriaAlumno(int idAlumno, int idMateria) {
 
@@ -274,7 +274,7 @@ public class InscripcionData {
             int fila = ps.executeUpdate();
 
             if (fila == 1) {
-                JOptionPane.showMessageDialog(null, " Se eliminó la materia");
+                JOptionPane.showMessageDialog(null, " Se eliminó la inscripción a la materia");
             }
             ps.close();
         } catch (SQLException e) {

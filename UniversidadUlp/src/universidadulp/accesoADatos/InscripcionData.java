@@ -1,5 +1,6 @@
 package universidadulp.accesoADatos;
 
+import org.mariadb.jdbc.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import org.mariadb.jdbc.Statement;
 import universidadulp.Entidades.Alumno;
 import universidadulp.Entidades.Inscripcion;
 import universidadulp.Entidades.Materia;
@@ -23,26 +23,53 @@ public class InscripcionData {
         conexion = Conexion.getConexion();
     }
 
+//    public void GuardarInscripcion(Inscripcion insc) {
+//
+//        String sql = "INSERT INTO inscripcion(idAlumno, idMateria, nota) VALUES (?, ?, ?)";
+//
+//        try {
+//            PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//            ps.setInt(1, insc.getAlumno().getIdAlumno());
+//            ps.setInt(2, insc.getMateria().getIdMateria());
+//            ps.setDouble(3, insc.getNota());
+//            ps.executeUpdate();
+//            ResultSet resultado = ps.getGeneratedKeys();
+//            if (resultado.next()) {
+//                insc.setIdInscripcion(resultado.getInt(1));
+//                JOptionPane.showMessageDialog(null, "Inscripción realizada con exito");
+//            }
+//            ps.close();
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error al acceder a la tabla Inscripcion", 0);
+//        }
+//    }
     public void GuardarInscripcion(Inscripcion insc) {
 
-        String sql = "INSERT INTO inscripcion(idAlumno, idMateria, nota) VALUES (?, ?, ?)";
+    String sql = "INSERT INTO inscripcion (idAlumno, idMateria, nota) VALUES (?, ?, ?)";
 
-        try {
-            PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, insc.getAlumno().getIdAlumno());
-            ps.setInt(2, insc.getMateria().getIdMateria());
-            ps.setDouble(3, insc.getNota());
-            ps.executeUpdate();
+    try {
+       PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ps.setInt(1, insc.getAlumno().getIdAlumno());
+        ps.setInt(2, insc.getMateria().getIdMateria());
+        ps.setDouble(3, insc.getNota());
+        int filasInsertadas = ps.executeUpdate();
+
+        if (filasInsertadas > 0) {
             ResultSet resultado = ps.getGeneratedKeys();
             if (resultado.next()) {
                 insc.setIdInscripcion(resultado.getInt(1));
-                JOptionPane.showMessageDialog(null, "Inscripción realizada con exito");
+                JOptionPane.showMessageDialog(null, "Inscripción realizada con éxito");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al obtener la clave generada", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error al acceder a la tabla Inscripcion", 0);
         }
+
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, ex.getMessage(), "Error al acceder a la tabla Inscripción", JOptionPane.ERROR_MESSAGE);
     }
+}
+
 
     public List<Inscripcion> obtenerInscripciones() {
 
@@ -104,13 +131,13 @@ public class InscripcionData {
     }
     
     
-    public List<Materia> obtenerMateriasCursadas(int idAlumno) {
+    public List<Materia> obtenerMateriasNoCursadas(int idAlumno) {//CAMBIE DE NOMBRE CON EL METODO DE ABAJO
 
         
         ArrayList<Materia> cursada = new ArrayList<>();
-
+        //CAMBIAR idmateria - idMateria y CAMBIAR ESTADO POR ACTIVO
         String sql = "SELECT* FROM materia" +
-               " WHERE estado = 1 and idmateria not in" +
+               " WHERE activo = 1 and idmateria not in" +
                 "(SELECT idMateria FROM inscripcion WHERE idAlumno = ?)";
         try {
 
@@ -134,14 +161,14 @@ public class InscripcionData {
         return cursada;
     }
     
-    public List<Materia> obtenerMateriasNoCursadas(int idAlumno) {
+    public List<Materia> obtenerMateriasCursadas(int idAlumno) {
 
         
         ArrayList<Materia> cursada = new ArrayList<>();
-
-        String sql = "SELECT inscripcion.idmateria, nombre, año FROM inscripcion," +
-                "materia WHERE inscripcion.idMateria =  materia.idmarteria"+
-                "and inscripcion.idAlumno = ?";
+        // CAMBIAR inscripcion.idmateria - inscripcion.idMateria CUIDADO SE ESCRIBIO MARTERIA
+        String sql = "SELECT inscripcion.idMateria, nombre, año " +
+                "FROM inscripcion, materia " +
+                "WHERE inscripcion.idMateria = materia.idMateria and inscripcion.idAlumno = 1";
         try {
 
             PreparedStatement ps = conexion.prepareStatement(sql);
@@ -169,13 +196,13 @@ public class InscripcionData {
 
     public void actualizarNota(int idAlumno, int idMateria, double nota) {
 
-        String sql = "UPDATE inscripcion SET nota = ? WHERE idAlumno = ? and idmateria = ?";
+        String sql = "UPDATE inscripcion SET nota = ? WHERE idAlumno = ? and idMateria = ?";
 
         try {
-            PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setDouble(1, nota);
             ps.setInt(2, idAlumno);
-            ps.setDouble(3, idMateria);
+            ps.setInt(3, idMateria);
 
             int filas = ps.executeUpdate();
             if (filas > 0) {
@@ -229,7 +256,7 @@ public class InscripcionData {
             int fila = ps.executeUpdate();
 
             if (fila == 1) {
-                JOptionPane.showMessageDialog(null, " Se Cambio el estado de la materia del alumno.");
+                JOptionPane.showMessageDialog(null, " Se Cambio el estado de la inscripcion del alumno.");
             }
             ps.close();
         } catch (SQLException e) {

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import universidadulp.Entidades.Alumno;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import universidadulp.Entidades.Inscripcion;
 import universidadulp.Entidades.Materia;
 import universidadulp.accesoADatos.*;
@@ -13,8 +14,8 @@ import universidadulp.accesoADatos.AlumnoData;
 public class UniversidadUlp {
 
     public static void main(String[] args) throws SQLException {
-       /* Alumno carlos = new Alumno(24141214, "Lalala", "Abuela", LocalDate.of(1997, Month.FEBRUARY, 17), true);
-        Alumno carlos1 = new Alumno(25141214, "Lalala", "Abuela1", LocalDate.of(1997, Month.FEBRUARY, 17), true);
+//        Alumno carlos = new Alumno(24141214, "Lalala", "Abuela", LocalDate.of(1997, Month.FEBRUARY, 17), true);
+       /* Alumno carlos1 = new Alumno(25141214, "Lalala", "Abuela1", LocalDate.of(1997, Month.FEBRUARY, 17), true);
         Alumno carlos2 = new Alumno(43214333, "Lalala", "Abuela2", LocalDate.of(1997, Month.FEBRUARY, 17), true);
         Alumno carlos3 = new Alumno(21444214, "Lalala", "Abuela3", LocalDate.of(1997, Month.FEBRUARY, 17), true);
         Alumno carlos4 = new Alumno(55555214, "Lalala", "Abuela4", LocalDate.of(1997, Month.FEBRUARY, 17), true);
@@ -28,6 +29,11 @@ public class UniversidadUlp {
  /* Alumno alumnoEncontrado = x.buscarAlumnoPorId(1);
         System.out.println("Nombre : "+alumnoEncontrado.getNombre());
         System.out.println("DNI : "+alumnoEncontrado.getDni());
+        System.out.println("_____________________________");
+        Alumno a = aluData.buscarAlumnoPorId(1);
+        System.out.println(a.getApellido());
+        System.out.println(a.getNombre());
+        System.out.println(a.getDni());
         System.out.println("_____________________________");
         alumnoEncontrado = x.buscarAlumnoPorDni(24141214);
         System.out.println("Nombre : "+alumnoEncontrado.getNombre());
@@ -52,24 +58,90 @@ public class UniversidadUlp {
         ma.guardarMateria(mate2);
         ma.guardarMateria(mate3);*/
         
-       /* AlumnoData alu = new AlumnoData();
-        for(Alumno alumno: alu.listarAlumnos()){
-            
-            System.out.println(alumno.getDni());
-            System.out.println(alumno.getApellido());
-            System.out.println(alumno.getNombre());
-            System.out.println(alumno.getFechaNac());
-        }*/
-        
+//       AlumnoData alu = new AlumnoData();
+//        for(Alumno alumno: alu.listarAlumnos()){
+//            
+//            System.out.println(alumno.getDni());
+//            System.out.println(alumno.getApellido());
+//            System.out.println(alumno.getNombre());
+//            System.out.println(alumno.getFechaNac());
+//            System.out.println("__________________");
+//        }
+////        
         AlumnoData aluData = new AlumnoData();
         MateriaData mateData = new MateriaData();
-        InscripcionData inscData = new InscripcionData();
+      
         
-        Alumno Lalala = aluData.buscarAlumnoPorId(1);
-        Materia Matematicas = mateData.buscarMateria(2);
-        Inscripcion insc = new Inscripcion(Lalala, Matematicas, 9);
-        
-        inscData.GuardarInscripcion(insc);
-    }
+//        TODAS LOS METODOS DE MATERIADATA ANDAN
+//        Materia ma= new Materia("Lengua", 3, true);
+//        mateData.guardarMateria(ma);
+//        System.out.println("____________");
+//        Materia m = mateData.buscarMateria(2);
+//         System.out.println("ID : "+m.getIdMateria());
+//        System.out.println("NOMBRE : "+ m.getNombre());
+//        System.out.println("AÑO: "+m.getAnio());
+//        System.out.println("_______________");
+//        Materia ma= new Materia(4,"Contabilidad", 2, true);
+//        mateData.modificarMateria(ma);
+//            System.out.println("____________________");
+//           mateData.bajarMateria(4);
+//        System.out.println("______________________");
+//        mateData.eliminarMateira(4);
+//        inscData.GuardarInscripcion(insc);
 
+        InscripcionData inscData = new InscripcionData();
+//        Alumno carlos = new Alumno(1, 24141214, "Lalala", "Abuela", LocalDate.of(1997, Month.FEBRUARY, 17), true);
+//        Materia ma = new Materia(5,"Lengua", 3, true);
+//        Inscripcion i = new Inscripcion(carlos, ma, 7.9);
+//        inscData.GuardarInscripcion(i);
+//        System.out.println("______________________");
+//        Materia materia = mateData.buscarMateria(2);
+//        Alumno alum = aluData.buscarAlumnoPorId(4);
+//        Inscripcion in = new Inscripcion(alum, materia, 11);
+//        inscData.GuardarInscripcion(in);
+//        System.out.println("___________________");
+//        
+//            ArrayList<Inscripcion> cursada = new ArrayList<>();
+//            cursada = (ArrayList<Inscripcion>) inscData.obtenerInscripciones();
+//            for (Inscripcion inscripcion : cursada) {
+//            System.out.println("ID : " + inscripcion.getIdInscripcion());
+//            System.out.println("ALUMNO : " + inscripcion.getAlumno().toString());
+//            System.out.println("MATERIA : " + inscripcion.getMateria().toString());
+//            System.out.println("NOTA : " + inscripcion.getNota());
+//            System.out.println("__________________");
+//            }
+
+//            ArrayList<Inscripcion> cursada = new ArrayList<>();
+//            cursada = (ArrayList<Inscripcion>) inscData.obtenerInscripcionesPorAlumno(1);
+//            for (Inscripcion inscripcion : cursada) {
+//            System.out.println("ID : " + inscripcion.getIdInscripcion());
+//            System.out.println("ALUMNO : " + inscripcion.getAlumno().toString());
+//            System.out.println("MATERIA : " + inscripcion.getMateria().toString());
+//            System.out.println("NOTA : " + inscripcion.getNota());
+//            System.out.println("__________________"); 
+//                }
+
+//              NOSE PORQUE TIRA QUE LAS MATERIAS NO ESTAN ACTIVAS(FALSE) CUANDO EL SQL DICE QUE SI (TRUE)
+//             ArrayList<Materia> materia1 = new ArrayList<>();
+//             materia1 = (ArrayList<Materia>) inscData.obtenerMateriasNoCursadas(1);
+//             for (Materia materia : materia1) {
+//             System.out.println(materia.toString());
+//             System.out.println("ESTADO : "+materia.isActivo());
+//              }
+
+//              ArrayList<Materia> materia1 = new ArrayList<>();
+//             materia1 = (ArrayList<Materia>) inscData.obtenerMateriasCursadas(1);
+//             for (Materia materia : materia1) {
+//             System.out.println(materia.toString());
+//             System.out.println("ESTADO : "+materia.isActivo());
+//                  }
+
+
+
+
+        
+    }
 }
+
+
+

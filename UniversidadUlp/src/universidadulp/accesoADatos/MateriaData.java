@@ -21,7 +21,7 @@ public class MateriaData {
 
     }
 
-    public void guardarMateria(Materia materia) throws SQLException {
+    public void guardarMateria(Materia materia) {
         String sql = "INSERT INTO materia (nombre, año, activo) VALUES (?,?,?)";
 
         try {
@@ -44,7 +44,8 @@ public class MateriaData {
 
     public Materia buscarMateria(int id) {
         Materia materia = null;
-        String sql = "SELECT nombre, anio FROM materia WERE idMateria=? AND activo=1";
+        //CAMBIE EL NOMBRE DE ANIO POR AÑO PORQUE ASI LO TENEMOS EN EL SQL
+        String sql = "SELECT nombre, año FROM materia WHERE idMateria=? AND activo=1";
         PreparedStatement ps = null;
 
         try {
@@ -55,7 +56,7 @@ public class MateriaData {
                 materia = new Materia();
                 materia.setIdMateria(id);
                 materia.setNombre(resultado.getString("nombre"));
-                materia.setAnio(resultado.getInt("anio"));
+                materia.setAnio(resultado.getInt("año"));
                 materia.setActivo(true);
             } else {
                 JOptionPane.showMessageDialog(null, "No existe la materia");
@@ -68,15 +69,17 @@ public class MateriaData {
     }
     
     public void modificarMateria(Materia materia) {
-
-        String sql = "UPDATE materia SET nombre = ? , anio = ?  WHERE idMateria = ?";
+  //CAMBIE EL NOMBRE DE ANIO POR AÑO PORQUE ASI LO TENEMOS EN EL SQL
+        String sql = "UPDATE materia SET nombre = ? , año = ?  WHERE idMateria = ?";
         PreparedStatement ps = null;
 
         try {
+            //EL TERCER SIGNO DE PREGUNTA PASA SIEmPRE EL 1 Y NOSOTROS QUERESMOS PASAR EL ID
             ps = conexion.prepareStatement(sql);
             ps.setString(1, materia.getNombre());
             ps.setInt(2, materia.getAnio());
-            ps.setBoolean(3, materia.isActivo());
+//            ps.setBoolean(3, materia.isActivo());
+            ps.setInt(3, materia.getIdMateria());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
@@ -93,7 +96,8 @@ public class MateriaData {
     public void bajarMateria(int id) {
 
         try {
-            String sql = "UPDATE materia SET estado = 0 WHERE idMateria = ? ";
+            //CAMBIE LA PALABRA ESTADO POR ACTIVO ASI ESTA EN EL SQL
+            String sql = "UPDATE materia SET activo = 0 WHERE idMateria = ? ";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, id);
             int fila = ps.executeUpdate();

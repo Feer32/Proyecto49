@@ -130,11 +130,10 @@ public class UniversidadUlp {
 
 //           inscData.eliminarInscripcionMateriaAlumno(1, 3);
     
-         for (Alumno inscripcion : inscData.obtenerAlumnosXMateria(1)) {
+//         for (Alumno inscripcion : inscData.obtenerAlumnosXMateria(1)) {
+//            System.out.println("ALUMNO : " + inscripcion.toString());
             
-            System.out.println("ALUMNO : " + inscripcion.toString());
-            
-                }
+//                }
          
          Principal principal = new Principal();
          principal.setVisible(true);

@@ -23,26 +23,6 @@ public class InscripcionData {
         conexion = Conexion.getConexion();
     }
 
-//    public void GuardarInscripcion(Inscripcion insc) {
-//
-//        String sql = "INSERT INTO inscripcion(idAlumno, idMateria, nota) VALUES (?, ?, ?)";
-//
-//        try {
-//            PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-//            ps.setInt(1, insc.getAlumno().getIdAlumno());
-//            ps.setInt(2, insc.getMateria().getIdMateria());
-//            ps.setDouble(3, insc.getNota());
-//            ps.executeUpdate();
-//            ResultSet resultado = ps.getGeneratedKeys();
-//            if (resultado.next()) {
-//                insc.setIdInscripcion(resultado.getInt(1));
-//                JOptionPane.showMessageDialog(null, "Inscripción realizada con exito");
-//            }
-//            ps.close();
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error al acceder a la tabla Inscripcion", 0);
-//        }
-//    }
     public void GuardarInscripcion(Inscripcion insc) {
 
     String sql = "INSERT INTO inscripcion (idAlumno, idMateria, nota) VALUES (?, ?, ?)";
@@ -69,8 +49,7 @@ public class InscripcionData {
         JOptionPane.showMessageDialog(null, ex.getMessage(), "Error al acceder a la tabla Inscripción", JOptionPane.ERROR_MESSAGE);
     }
 }
-
-
+    
     public List<Inscripcion> obtenerInscripciones() {
 
         
@@ -129,8 +108,7 @@ public class InscripcionData {
         }
         return cursada;
     }
-    
-    
+        
     public List<Materia> obtenerMateriasNoCursadas(int idAlumno) {//CAMBIE DE NOMBRE CON EL METODO DE ABAJO
 
         
@@ -190,9 +168,6 @@ public class InscripcionData {
         }
         return cursada;
     }
-    
-    
-    
 
     public void actualizarNota(int idAlumno, int idMateria, double nota) {
 
@@ -245,6 +220,24 @@ public class InscripcionData {
         }
         return alumnosMateria;
     }
+
+    public void eliminarInscripcionMateriaAlumno(int idAlumno, int idMateria) {
+
+        try {
+            String sql = "DELETE FROM inscripcion WHERE idAlumno = ? and idMateria = ?";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, idAlumno);
+            ps.setInt(2, idMateria);
+            int fila = ps.executeUpdate();
+
+            if (fila == 1) {
+                JOptionPane.showMessageDialog(null, " Se eliminó la inscripción a la materia");
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla inscripción");
+        }
+    }
     
 //    public void darBajaInscripcionMateriaAlumno(int idAlumno, int idMateria) {
 //
@@ -264,22 +257,8 @@ public class InscripcionData {
 //        }
 //    }
     
-    public void eliminarInscripcionMateriaAlumno(int idAlumno, int idMateria) {
+    
+}
 
-        try {
-            String sql = "DELETE FROM inscripcion WHERE idAlumno = ? and idMateria = ?";
-            PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setInt(1, idAlumno);
-            ps.setInt(2, idMateria);
-            int fila = ps.executeUpdate();
-
-            if (fila == 1) {
-                JOptionPane.showMessageDialog(null, " Se eliminó la inscripción a la materia");
-            }
-            ps.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla inscripción");
-        }
-    }
-    }
+    
 

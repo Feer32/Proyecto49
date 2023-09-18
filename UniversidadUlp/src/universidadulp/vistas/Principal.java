@@ -21,7 +21,7 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), "PROYECTO49", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(0, 204, 255))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), "PROYECTO49", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 204, 255))); // NOI18N
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Footlight MT Light", 1, 36)); // NOI18N
@@ -55,7 +55,7 @@ public class Principal extends javax.swing.JFrame {
         jbConsultas.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jbConsultas.setText("CONSULTAS");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Estudiante\\Pictures\\imagenes proyec\\emI.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\Datos del cpu\\Documentos\\Curso\\UniversidadULP TPF\\Proyecto49\\UniversidadUlp\\emI.png")); // NOI18N
         jLabel2.setMaximumSize(new java.awt.Dimension(170, 207));
         jLabel2.setPreferredSize(new java.awt.Dimension(1125, 1022));
 
@@ -74,9 +74,9 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jbMateria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbConsultas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbConsultas1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88))
+                .addGap(91, 91, 91))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(167, 167, 167)
                 .addComponent(jLabel1)
@@ -100,7 +100,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jbConsultas1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(85, Short.MAX_VALUE))
         );

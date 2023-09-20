@@ -141,4 +141,6 @@ public class UniversidadUlp {
          principal.setVisible(true);
          principal.setLocationRelativeTo(null);
     }
+    
+
 }

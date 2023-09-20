@@ -258,7 +258,7 @@ public class FormularioAlumno extends javax.swing.JFrame {
         }else {
             AlumnoData alu = new AlumnoData();
             int repetido=0;
-            for (Alumno alumno : alu.listarAlumnos()) {
+            for (Alumno alumno : alu.listaCompletaDeAlumnos()) {
                 if(alumno.getDni() == Integer.parseInt(jtDocumento.getText())){
                     JOptionPane.showMessageDialog(this, "No pueden existir alumnos con el mismo DOCUMENTO");
                     repetido=1;

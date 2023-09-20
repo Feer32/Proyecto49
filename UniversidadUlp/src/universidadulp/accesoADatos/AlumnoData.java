@@ -51,14 +51,14 @@ public class AlumnoData {
             ps.setInt(1, id);
             ResultSet resultado = ps.executeQuery();
             if (resultado.next()) {
-               alumno = new Alumno();
+                alumno = new Alumno();
                 alumno.setIdAlumno(id);
                 alumno.setDni(resultado.getInt("dni"));
                 alumno.setApellido(resultado.getString("apellido"));
                 alumno.setNombre(resultado.getString("nombre"));
                 alumno.setFechaNac(resultado.getDate("fechaNacimiento").toLocalDate());
                 alumno.setEstado(true);
-          
+
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el alumno");
             }
@@ -98,11 +98,63 @@ public class AlumnoData {
         return alumno;
     }
 
-    public List<Alumno> listarAlumnos() {
+    public List<Alumno> listarAlumnosActivos() {
 
         List<Alumno> alumnos = new ArrayList<>();
         try {
             String sql = "SELECT * FROM alumno WHERE estado = 1 ";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Alumno alumno = new Alumno();
+
+                alumno.setIdAlumno(rs.getInt("idAlumno"));
+                alumno.setDni(rs.getInt("dni"));
+                alumno.setApellido(rs.getString("apellido"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
+                alumno.setEstado(rs.getBoolean("estado"));
+                alumnos.add(alumno);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno " + ex.getMessage());
+        }
+        return alumnos;
+    }
+
+    public List<Alumno> listaCompletaDeAlumnos() {
+
+        List<Alumno> alumnos = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM alumno ";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Alumno alumno = new Alumno();
+
+                alumno.setIdAlumno(rs.getInt("idAlumno"));
+                alumno.setDni(rs.getInt("dni"));
+                alumno.setApellido(rs.getString("apellido"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
+                alumno.setEstado(rs.getBoolean("estado"));
+                alumnos.add(alumno);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno " + ex.getMessage());
+        }
+        return alumnos;
+    }
+
+    public List<Alumno> listarAlumnosNoActivos() {
+
+        List<Alumno> alumnos = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM alumno WHERE estado = 0 ";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -165,8 +217,8 @@ public class AlumnoData {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno");
         }
     }
-    
-      public void eliminarAlumno(int id) {
+
+    public void eliminarAlumno(int id) {
 
         try {
             String sql = "DELETE FROM `alumno` WHERE idAlumno = ? ";

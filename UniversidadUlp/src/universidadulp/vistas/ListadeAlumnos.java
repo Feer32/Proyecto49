@@ -222,9 +222,6 @@ public class ListadeAlumnos extends javax.swing.JFrame {
         if(fila != -1){
             aluData.eliminarAlumno((Integer) modelo.getValueAt(fila, 0));
             modelo.removeRow(fila);
-
-
-            
         }else{
             JOptionPane.showMessageDialog(this, "No haz seleccionado ningun Alumno");
         }
@@ -254,7 +251,7 @@ public class ListadeAlumnos extends javax.swing.JFrame {
         } else {
             AlumnoData alu = new AlumnoData();
             int registo = 0;
-            for (Alumno student : alu.listarAlumnos()) {
+            for (Alumno student : alu.listaCompletaDeAlumnos()) {
                 if (student.getIdAlumno()== data) {
                     alumno.setIdAlumno(data);
                     alumno.setNombre(jtNombre.getText());
@@ -294,10 +291,8 @@ public class ListadeAlumnos extends javax.swing.JFrame {
         Alumno alu = new Alumno();
         int data = (Integer) modelo.getValueAt(fila, 0);
         alu = aluData.buscarAlumnoPorId(data);
-        Integer dni = alu.getDni();
-        String dni2  = dni.toString();
             if(fila != -1){
-                jtDocumento.setText(dni2);
+                jtDocumento.setText(alu.getDni() + "");
                 jtNombre.setText(alu.getNombre());
                 jtApellido.setText(alu.getApellido());
                 if (alu.isEstado() == true) {
@@ -326,9 +321,9 @@ public class ListadeAlumnos extends javax.swing.JFrame {
     
     
     private void RellenarLista(){
-        for (Alumno listarAlumno : aluData.listarAlumnos()) {
+        for (Alumno listarAlumno : aluData.listaCompletaDeAlumnos()) {
             modelo.addRow(new Object []{
-            listarAlumno.getIdAlumno(),
+                listarAlumno.getIdAlumno(),
                 listarAlumno.getDni(),
                 listarAlumno.getApellido(),
                 listarAlumno.getNombre(),

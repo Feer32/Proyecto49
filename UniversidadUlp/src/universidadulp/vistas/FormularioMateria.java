@@ -1,5 +1,6 @@
 package universidadulp.vistas;
 
+import javax.swing.JOptionPane;
 import universidadulp.Entidades.Materia;
 import universidadulp.accesoADatos.MateriaData;
 
@@ -34,7 +35,7 @@ public class FormularioMateria extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "DATOS MATERIA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(0, 102, 0))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATOS MATERIA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 102, 0))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
         jLabel1.setText("MATERIA");
@@ -64,6 +65,11 @@ public class FormularioMateria extends javax.swing.JFrame {
         jcEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "ACTIVO", "NO ACTIVO" }));
 
         jbNuevo.setText("NUEVO");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jbListaMateria.setText("LISTA DE MATERIA");
 
@@ -92,9 +98,9 @@ public class FormularioMateria extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jbNuevo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(66, 66, 66)
                         .addComponent(jbListaMateria)
-                        .addGap(80, 80, 80)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbSalir)
                         .addGap(39, 39, 39))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -231,6 +237,18 @@ public class FormularioMateria extends javax.swing.JFrame {
            jcEstado.setSelectedIndex(0);
            jtCodigo.setText("");
     }//GEN-LAST:event_jtLimpiarActionPerformed
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        // TODO add your handling code here:
+        if(jtNombre.getText().isEmpty() ||
+           jtAño.getText().isEmpty() || 
+           jcEstado.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(this, "RELLENAME TODOS LOS CAMPO FLAC@!!");
+        }else{
+               
+                }
+        
+    }//GEN-LAST:event_jbNuevoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -30,13 +30,15 @@ public class UniversidadUlp {
  /* Alumno alumnoEncontrado = x.buscarAlumnoPorId(1);
         System.out.println("Nombre : "+alumnoEncontrado.getNombre());
         System.out.println("DNI : "+alumnoEncontrado.getDni());
+        System.out.println("_____________________________");*/
+        AlumnoData aluData1 = new AlumnoData();
+        Alumno alu = aluData1.buscarAlumnoPorId(4);
+        System.out.println(alu.getApellido());
+        System.out.println(alu.getNombre());
+        System.out.println(alu.getDni());
+        System.out.println(alu.isEstado());
         System.out.println("_____________________________");
-        Alumno a = aluData.buscarAlumnoPorId(1);
-        System.out.println(a.getApellido());
-        System.out.println(a.getNombre());
-        System.out.println(a.getDni());
-        System.out.println("_____________________________");
-        alumnoEncontrado = x.buscarAlumnoPorDni(24141214);
+       /* alumnoEncontrado = x.buscarAlumnoPorDni(24141214);
         System.out.println("Nombre : "+alumnoEncontrado.getNombre());
         System.out.println("Apellido: "+alumnoEncontrado.getApellido());
         System.out.println("__________________________");
@@ -135,8 +137,8 @@ public class UniversidadUlp {
             
 //                }
          
-         Principal principal = new Principal();
-         principal.setVisible(true);
-         principal.setLocationRelativeTo(null);
+//         Principal principal = new Principal();
+//         principal.setVisible(true);
+//         principal.setLocationRelativeTo(null);
     }
 }

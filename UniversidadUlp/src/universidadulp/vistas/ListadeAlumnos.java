@@ -287,16 +287,18 @@ public class ListadeAlumnos extends javax.swing.JFrame {
 
     private void jtListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListaMouseClicked
         // TODO add your handling code here:
-        int fila =  jtLista.getSelectedColumn();
+        int fila =  jtLista.getSelectedRow();
         Alumno alu = new Alumno();
         int data = (Integer) modelo.getValueAt(fila, 0);
+//        System.out.println(data);
         alu = aluData.buscarAlumnoPorId(data);
             if(fila != -1){
                 jtDocumento.setText(alu.getDni() + "");
                 jtNombre.setText(alu.getNombre());
                 jtApellido.setText(alu.getApellido());
+                System.out.println(alu.isEstado());
                 if (alu.isEstado() == true) {
-                    jcEstado.setSelectedIndex(1);
+                    jcEstado.setSelectedIndex (1);
                 } else {
                     jcEstado.setSelectedIndex(2);
                 }

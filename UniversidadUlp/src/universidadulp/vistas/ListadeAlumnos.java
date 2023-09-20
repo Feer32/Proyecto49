@@ -239,7 +239,7 @@ public class ListadeAlumnos extends javax.swing.JFrame {
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
         // TODO add your handling code here:
-        int fila =  jtLista.getSelectedColumn();
+        int fila =  jtLista.getSelectedRow();
         Alumno alumno = new Alumno();
         int data = (Integer) modelo.getValueAt(fila, 0); 
         if (jtDocumento.getText().isEmpty()
@@ -256,7 +256,12 @@ public class ListadeAlumnos extends javax.swing.JFrame {
                     alumno.setIdAlumno(data);
                     alumno.setNombre(jtNombre.getText());
                     alumno.setApellido(jtApellido.getText());
-                    alumno.setDni(Integer.parseInt(jtDocumento.getText()));
+                    if(Integer.parseInt(jtDocumento.getText()) != student.getDni()){
+                       alumno.setDni(Integer.parseInt(jtDocumento.getText())); 
+                    }else{
+                       alumno.setDni(student.getDni());
+                    }
+                    
                     switch (jcEstado.getSelectedIndex()) {
                         case 1:
                         alumno.setEstado(true);
@@ -296,7 +301,6 @@ public class ListadeAlumnos extends javax.swing.JFrame {
                 jtDocumento.setText(alu.getDni() + "");
                 jtNombre.setText(alu.getNombre());
                 jtApellido.setText(alu.getApellido());
-                System.out.println(alu.isEstado());
                 if (alu.isEstado() == true) {
                     jcEstado.setSelectedIndex (1);
                 } else {

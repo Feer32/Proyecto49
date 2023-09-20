@@ -44,7 +44,7 @@ public class AlumnoData {
 
     public Alumno buscarAlumnoPorId(int id) {
         Alumno alumno = null;
-        String sql = "SELECT dni, apellido, nombre, fechaNacimiento FROM alumno WHERE idAlumno=? AND estado=1 OR estado=0";
+        String sql = "SELECT dni, apellido, nombre, fechaNacimiento, estado FROM alumno WHERE idAlumno=? ";
         PreparedStatement ps = null;
         try {
             ps = conexion.prepareStatement(sql);
@@ -57,14 +57,7 @@ public class AlumnoData {
                 alumno.setApellido(resultado.getString("apellido"));
                 alumno.setNombre(resultado.getString("nombre"));
                 alumno.setFechaNac(resultado.getDate("fechaNacimiento").toLocalDate());
-//                alumno.setEstado(true);
                 alumno.setEstado(resultado.getBoolean("estado"));  
-//                if(resultado.getBoolean("estado") == true){
-//                alumno.setEstado(true);    
-//                }else{
-//                alumno.setEstado(false);     
-//                }
-               
 
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el alumno");
@@ -185,7 +178,7 @@ public class AlumnoData {
 
     public void modificarAlumno(Alumno alumno) {
 
-        String sql = "UPDATE alumno SET dni = ? , apellido = ?, nombre = ?, fechaNacimiento = ? WHERE idAlumno = ?";
+        String sql = "UPDATE alumno SET dni=? , apellido=?, nombre=?, fechaNacimiento=?, estado=? WHERE idAlumno=?";
         PreparedStatement ps = null;
 
         try {
@@ -194,7 +187,8 @@ public class AlumnoData {
             ps.setString(2, alumno.getApellido());
             ps.setString(3, alumno.getNombre());
             ps.setDate(4, Date.valueOf(alumno.getFechaNac()));
-            ps.setInt(5, alumno.getIdAlumno());
+            ps.setBoolean(5, alumno.isEstado());
+            ps.setInt(6, alumno.getIdAlumno());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {

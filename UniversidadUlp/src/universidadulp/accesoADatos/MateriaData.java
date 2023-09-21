@@ -111,7 +111,7 @@ public class MateriaData {
         }
     }
     
-      public void eliminarMateira(int id) {
+      public void eliminarMateria(int id) {
 
         try {
             String sql = "DELETE FROM `materia` WHERE idMateria = ? ";
@@ -132,14 +132,14 @@ public class MateriaData {
 
         List<Materia> materias = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM materia WHERE estado = 1 ";
+            String sql = "SELECT * FROM materia ";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Materia materia = new Materia();
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
-                materia.setAnio(rs.getInt("anio"));
+                materia.setAnio(rs.getInt("año"));
                 materia.setActivo(rs.getBoolean("activo"));
                 materias.add(materia);
             }

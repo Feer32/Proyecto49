@@ -238,7 +238,7 @@ public class ListadeAlumnos extends javax.swing.JFrame {
     }//GEN-LAST:event_jbAtrasActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
-        // TODO add your handling code here:
+        
         int fila =  jtLista.getSelectedRow();
         Alumno alumno = new Alumno();
         int data = (Integer) modelo.getValueAt(fila, 0); 
@@ -246,7 +246,8 @@ public class ListadeAlumnos extends javax.swing.JFrame {
             || jtNombre.getText().isEmpty()
             || jtApellido.getText().isEmpty()
             || jcEstado.getSelectedIndex() == 0
-            || jdFechaNac.getDate() == null) {
+            || jdFechaNac.getDate() == null 
+            || fila == -1) {
             JOptionPane.showMessageDialog(this, "SELCCIONAME EL ALUMNO QUE QUIERES MODICAR FLAC@!!");
         } else {
             AlumnoData alu = new AlumnoData();

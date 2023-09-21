@@ -1,25 +1,27 @@
-
 package universidadulp.vistas;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import universidadulp.Entidades.Materia;
+import universidadulp.accesoADatos.MateriaData;
 
 public class ListaMateria extends javax.swing.JFrame {
     
+    MateriaData materiadata = new MateriaData();
     
-   
     public ListaMateria() {
         initComponents();
+        armarCabecera();
+        rellenarLista();
     }
     
-    public DefaultTableModel modelo = new DefaultTableModel(){
-            
-        public boolean isCellEditable(int fila, int columna){
+    public DefaultTableModel modelo = new DefaultTableModel() {
+        
+        public boolean isCellEditable(int fila, int columna) {
             return false;
         }
-            };
-
-  
+    };
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -33,9 +35,9 @@ public class ListaMateria extends javax.swing.JFrame {
         jtNombre = new javax.swing.JTextField();
         jtAño = new javax.swing.JTextField();
         jcEstado = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbAtras = new javax.swing.JButton();
+        jbEliminar = new javax.swing.JButton();
+        jbModificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,6 +52,11 @@ public class ListaMateria extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtListaMaterias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtListaMateriasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtListaMaterias);
 
         jLabel3.setText("NOMBRE:");
@@ -72,11 +79,21 @@ public class ListaMateria extends javax.swing.JFrame {
 
         jcEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "ACTIVO", "NO ACTIVO" }));
 
-        jButton1.setText("ATRAS");
+        jbAtras.setText("ATRAS");
+        jbAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAtrasActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("ELIMINAR");
+        jbEliminar.setText("ELIMINAR");
 
-        jButton3.setText("MODIFICAR");
+        jbModificar.setText("MODIFICAR");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -93,7 +110,7 @@ public class ListaMateria extends javax.swing.JFrame {
                     .addComponent(jtAño, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(jbEliminar))
                 .addGap(94, 94, 94))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
@@ -101,9 +118,9 @@ public class ListaMateria extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addComponent(jButton1)
+                .addComponent(jbAtras)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(jbModificar)
                 .addGap(64, 64, 64))
         );
         jPanel1Layout.setVerticalGroup(
@@ -125,9 +142,9 @@ public class ListaMateria extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGap(51, 51, 51)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jbAtras)
+                    .addComponent(jbEliminar)
+                    .addComponent(jbModificar))
                 .addGap(25, 25, 25))
         );
 
@@ -153,23 +170,110 @@ public class ListaMateria extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtAñoActionPerformed
 
-   
+    private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
+        
+        FormularioMateria formularioMateria = new FormularioMateria();
+        formularioMateria.setVisible(true);
+        formularioMateria.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_jbAtrasActionPerformed
+
+    private void jtListaMateriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListaMateriasMouseClicked
+        
+        int fila = jtListaMaterias.getSelectedRow();
+        Materia materia = new Materia();
+        int dato = (Integer) modelo.getValueAt(fila, 0);
+        materia = materiadata.buscarMateria(dato);
+        if (fila != -1) {
+            jtNombre.setText(materia.getNombre());
+            jtAño.setText(materia.getAnio() + "");
+            if (materia.isActivo() == true) {
+                jcEstado.setSelectedIndex(1);
+            } else {
+                jcEstado.setSelectedIndex(2);
+            }
+            
+        }
+    }//GEN-LAST:event_jtListaMateriasMouseClicked
+
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+        
+        if (jtNombre.getText().isEmpty()
+                || jtAño.getText().isEmpty()
+                || jcEstado.getSelectedIndex() == 0
+                || jtListaMaterias.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Flac@ sseleccioname la materia porfis");
+        } else {
+            
+            int fila = jtListaMaterias.getSelectedRow();
+            
+            int data = (Integer) modelo.getValueAt(fila, 0);
+            
+            for (Materia mate : materiadata.listarMaterias()) {
+                if (mate.getIdMateria() == data) {
+                    mate.setNombre(jtNombre.getText());
+                    mate.setAnio(Integer.parseInt(jtAño.getText()));
+                    
+                    mate.setIdMateria(data);
+                    
+                    switch (jcEstado.getSelectedIndex()) {
+                        case 1:
+                            mate.setActivo(true);
+                            break;
+                        case 2:
+                            mate.setActivo(false);
+                            break;
+                    }
+                }
+            }
+            
+        }
+    }//GEN-LAST:event_jbModificarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbAtras;
+    private javax.swing.JButton jbEliminar;
+    private javax.swing.JButton jbModificar;
     private javax.swing.JComboBox<String> jcEstado;
     private javax.swing.JTextField jtAño;
     private javax.swing.JTable jtListaMaterias;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
 
+    private void armarCabecera() {
+        
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Año");
+        modelo.addColumn("Estado");
+        
+        jtListaMaterias.setModel(modelo);
+    }
     
-
+    private void rellenarLista() {
+        
+        for (Materia listarMateria : materiadata.listarMaterias()) {
+            
+            modelo.addRow(new Object[]{
+                listarMateria.getIdMateria(),
+                listarMateria.getNombre(),
+                listarMateria.getAnio(),
+                listarMateria.isActivo()
+            });
+        }
+    }
+    
+    private void borrarLista() {
+        
+        int fila = modelo.getRowCount() - 1;
+        for (int i = fila; i >= 0; i--) {
+            modelo.removeRow(i);
+        }
+    }
 }

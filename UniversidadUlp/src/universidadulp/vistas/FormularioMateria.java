@@ -35,7 +35,7 @@ public class FormularioMateria extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATOS MATERIA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 102, 0))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "DATOS MATERIA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(0, 102, 0))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
         jLabel1.setText("MATERIA");
@@ -72,6 +72,11 @@ public class FormularioMateria extends javax.swing.JFrame {
         });
 
         jbListaMateria.setText("LISTA DE MATERIA");
+        jbListaMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbListaMateriaActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("SALIR");
 
@@ -249,6 +254,13 @@ public class FormularioMateria extends javax.swing.JFrame {
                 }
         
     }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jbListaMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListaMateriaActionPerformed
+        ListaMateria lis = new ListaMateria();
+        lis.setVisible(true);
+        lis.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_jbListaMateriaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

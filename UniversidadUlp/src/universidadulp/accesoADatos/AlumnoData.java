@@ -202,22 +202,22 @@ public class AlumnoData {
         }
     }
 
-    public void bajarAlumno(int id) {
-
-        try {
-            String sql = "UPDATE alumno SET estado = 0 WHERE idAlumno = ? ";
-            PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setInt(1, id);
-            int fila = ps.executeUpdate();
-
-            if (fila == 1) {
-                JOptionPane.showMessageDialog(null, " Se Cambio el estado del alumno.");
-            }
-            ps.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno");
-        }
-    }
+//    public void bajarAlumno(int id) {
+//
+//        try {
+//            String sql = "UPDATE alumno SET estado = 0 WHERE idAlumno = ? ";
+//            PreparedStatement ps = conexion.prepareStatement(sql);
+//            ps.setInt(1, id);
+//            int fila = ps.executeUpdate();
+//
+//            if (fila == 1) {
+//                JOptionPane.showMessageDialog(null, " Se Cambio el estado del alumno.");
+//            }
+//            ps.close();
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno");
+//        }
+//    }
 
     public void eliminarAlumno(int id) {
 

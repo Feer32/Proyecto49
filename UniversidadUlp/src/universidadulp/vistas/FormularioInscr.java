@@ -1,16 +1,15 @@
 
 package universidadulp.vistas;
 
-import java.time.LocalDate;
-import java.time.Month;
+
 import universidadulp.Entidades.Alumno;
 import universidadulp.accesoADatos.AlumnoData;
 
 
-public class Inscripciones extends javax.swing.JFrame {
+public class FormularioInscr extends javax.swing.JFrame {
 
     
-    public Inscripciones() {
+    public FormularioInscr() {
         initComponents();
         llenarCombo();
     }
@@ -49,6 +48,17 @@ public class Inscripciones extends javax.swing.JFrame {
         jLabel2.setText("FORMULARIO DE INSCRIPCIÓN");
 
         jLabel3.setText("SELECCIONE UN ALUMNO:");
+
+        jcSelecAlumno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcSelecAlumnoMouseClicked(evt);
+            }
+        });
+        jcSelecAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcSelecAlumnoActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -193,6 +203,18 @@ public class Inscripciones extends javax.swing.JFrame {
         cargarTabla();
     }//GEN-LAST:event_formWindowOpened
 
+    private void jcSelecAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcSelecAlumnoActionPerformed
+        Alumno alumno=(Alumno)jcSelecAlumno.getSelectedItem();
+        System.out.println(alumno);
+        alumno.getIdAlumno();
+        System.out.println(jrbMateriasInsc.isSelected());
+                
+    }//GEN-LAST:event_jcSelecAlumnoActionPerformed
+
+    private void jcSelecAlumnoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcSelecAlumnoMouseClicked
+
+    }//GEN-LAST:event_jcSelecAlumnoMouseClicked
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -207,7 +229,7 @@ public class Inscripciones extends javax.swing.JFrame {
     private javax.swing.JButton jbAnularInsc;
     private javax.swing.JButton jbInscribir;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<String> jcSelecAlumno;
+    private javax.swing.JComboBox<Alumno> jcSelecAlumno;
     private javax.swing.JRadioButton jrbMateriaNoInsc;
     private javax.swing.JRadioButton jrbMateriasInsc;
     private javax.swing.JTable jtTablaInsc;
@@ -222,9 +244,11 @@ public class Inscripciones extends javax.swing.JFrame {
         AlumnoData aludata=new AlumnoData();
 //        Alumno alumno = new Alumno(21, "apellido", "nombre", LocalDate.of(1992, Month.MARCH, 12), true);
         Alumno alumno = aludata.buscarAlumnoPorId(1);
-        jcSelecAlumno.addItem(alumno.toString());
+        Alumno alumno2 = aludata.buscarAlumnoPorId(7);
+        jcSelecAlumno.addItem(alumno);
+        jcSelecAlumno.addItem(alumno2);
         
-        jcSelecAlumno.addItem("ÑAÑA");
+//        jcSelecAlumno.addItem("ÑAÑA");
         
     }
 }

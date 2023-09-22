@@ -251,7 +251,6 @@ public class ListadeAlumnos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "SELCCIONAME EL ALUMNO QUE QUIERES MODICAR FLAC@!!");
         } else {
             AlumnoData alu = new AlumnoData();
-            int registo = 0;
             for (Alumno student : alu.listaCompletaDeAlumnos()) {
                 if (student.getIdAlumno()== data) {
                     alumno.setIdAlumno(data);
@@ -273,13 +272,11 @@ public class ListadeAlumnos extends javax.swing.JFrame {
                     }
                     alumno.setFechaNac(jdFechaNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                     alu.modificarAlumno(alumno);
-                    registo = 1;
+                  
                 }
 
             }
-            if (registo == 0) {
-                JOptionPane.showMessageDialog(this, "Solo se puede modificar alumnos anteriormente registrados");
-            }
+           
             Borrarfila();
             RellenarLista();
             jtDocumento.setText("");

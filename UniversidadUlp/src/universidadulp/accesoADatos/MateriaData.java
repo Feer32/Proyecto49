@@ -45,7 +45,7 @@ public class MateriaData {
     public Materia buscarMateria(int id) {
         Materia materia = null;
         //CAMBIE EL NOMBRE DE ANIO POR AÑO PORQUE ASI LO TENEMOS EN EL SQL
-        String sql = "SELECT nombre, año FROM materia WHERE idMateria=? AND activo=1";
+        String sql = "SELECT nombre, año, activo FROM materia WHERE idMateria=? ";
         PreparedStatement ps = null;
 
         try {
@@ -57,7 +57,7 @@ public class MateriaData {
                 materia.setIdMateria(id);
                 materia.setNombre(resultado.getString("nombre"));
                 materia.setAnio(resultado.getInt("año"));
-                materia.setActivo(true);
+                materia.setActivo(resultado.getBoolean("activo"));
             } else {
                 JOptionPane.showMessageDialog(null, "No existe la materia");
             }
@@ -70,7 +70,7 @@ public class MateriaData {
     
     public void modificarMateria(Materia materia) {
   //CAMBIE EL NOMBRE DE ANIO POR AÑO PORQUE ASI LO TENEMOS EN EL SQL
-        String sql = "UPDATE materia SET nombre = ? , año = ?  WHERE idMateria = ?";
+        String sql = "UPDATE materia SET nombre = ? , año = ? , activo = ?  WHERE idMateria = ?";
         PreparedStatement ps = null;
 
         try {
@@ -78,8 +78,8 @@ public class MateriaData {
             ps = conexion.prepareStatement(sql);
             ps.setString(1, materia.getNombre());
             ps.setInt(2, materia.getAnio());
-//            ps.setBoolean(3, materia.isActivo());
-            ps.setInt(3, materia.getIdMateria());
+            ps.setBoolean(3, materia.isActivo());
+            ps.setInt(4, materia.getIdMateria());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {

@@ -1,12 +1,12 @@
 package universidadulp;
 
-//import java.time.LocalDate;
-//import java.time.Month;
+import java.time.LocalDate;
+import java.time.Month;
 import universidadulp.Entidades.Alumno;
 import java.sql.SQLException;
-//import java.util.ArrayList;
-//import universidadulp.Entidades.Inscripcion;
-//import universidadulp.Entidades.Materia;
+import java.util.ArrayList;
+import universidadulp.Entidades.Inscripcion;
+import universidadulp.Entidades.Materia;
 import universidadulp.accesoADatos.*;
 
 import universidadulp.accesoADatos.AlumnoData;

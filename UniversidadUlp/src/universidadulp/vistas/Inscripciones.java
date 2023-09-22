@@ -1,12 +1,18 @@
 
 package universidadulp.vistas;
 
+import java.time.LocalDate;
+import java.time.Month;
+import universidadulp.Entidades.Alumno;
+import universidadulp.accesoADatos.AlumnoData;
+
 
 public class Inscripciones extends javax.swing.JFrame {
 
     
     public Inscripciones() {
         initComponents();
+        llenarCombo();
     }
 
     
@@ -43,8 +49,6 @@ public class Inscripciones extends javax.swing.JFrame {
         jLabel2.setText("FORMULARIO DE INSCRIPCIÓN");
 
         jLabel3.setText("SELECCIONE UN ALUMNO:");
-
-        jcSelecAlumno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -124,7 +128,7 @@ public class Inscripciones extends javax.swing.JFrame {
                         .addComponent(jbInscribir)
                         .addGap(57, 57, 57)
                         .addComponent(jbAnularInsc)
-                        .addGap(59, 59, 59)
+                        .addGap(47, 47, 47)
                         .addComponent(jbSalir)
                         .addGap(79, 79, 79))))
         );
@@ -210,6 +214,17 @@ public class Inscripciones extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cargarTabla() {
+        
+    }
+    
+    private void llenarCombo(){
+        
+        AlumnoData aludata=new AlumnoData();
+//        Alumno alumno = new Alumno(21, "apellido", "nombre", LocalDate.of(1992, Month.MARCH, 12), true);
+        Alumno alumno = aludata.buscarAlumnoPorId(1);
+        jcSelecAlumno.addItem(alumno.toString());
+        
+        jcSelecAlumno.addItem("ÑAÑA");
         
     }
 }

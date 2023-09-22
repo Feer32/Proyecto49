@@ -1,5 +1,7 @@
 package universidadulp.vistas;
 
+import javax.swing.JOptionPane;
+
 public class Principal extends javax.swing.JFrame {
 
     public Principal() {
@@ -55,7 +57,7 @@ public class Principal extends javax.swing.JFrame {
         jbConsultas.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jbConsultas.setText("CONSULTAS");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\Datos del cpu\\Documentos\\Curso\\UniversidadULP TPF\\Proyecto49\\UniversidadUlp\\emI.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\angel\\Desktop\\GitHub\\Proyecto49\\UniversidadUlp\\emI.png")); // NOI18N
         jLabel2.setMaximumSize(new java.awt.Dimension(170, 207));
         jLabel2.setPreferredSize(new java.awt.Dimension(1125, 1022));
 
@@ -74,7 +76,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jbMateria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbConsultas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbConsultas1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(91, 91, 91))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -93,11 +95,11 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jbAlumno)
                         .addGap(18, 18, 18)
                         .addComponent(jbMateria)
-                        .addGap(18, 18, 18)
+                        .addGap(20, 20, 20)
                         .addComponent(jbAdminis)
                         .addGap(18, 18, 18)
                         .addComponent(jbConsultas)
-                        .addGap(18, 18, 18)
+                        .addGap(24, 24, 24)
                         .addComponent(jbConsultas1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -124,6 +126,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAdminisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdminisActionPerformed
+       
         Administracion pantalla = new Administracion();
         pantalla.setVisible(true);
         pantalla.setLocationRelativeTo(null);
@@ -132,9 +135,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbAdminisActionPerformed
 
     private void jbAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlumnoActionPerformed
+       JOptionPane.showMessageDialog(this, "OK");
         FormularioAlumno pantalla = new FormularioAlumno();
-//        jPanel1.removeAll();
-//        jPanel1.repaint();
         pantalla.setVisible(true);
         pantalla.setLocationRelativeTo(null);
         

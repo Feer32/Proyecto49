@@ -65,18 +65,6 @@ public class ListaMateria extends javax.swing.JFrame {
 
         jLabel5.setText("ESTADO:");
 
-        jtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtNombreActionPerformed(evt);
-            }
-        });
-
-        jtAño.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtAñoActionPerformed(evt);
-            }
-        });
-
         jcEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "ACTIVO", "NO ACTIVO" }));
 
         jbAtras.setText("ATRAS");
@@ -87,6 +75,11 @@ public class ListaMateria extends javax.swing.JFrame {
         });
 
         jbEliminar.setText("ELIMINAR");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jbModificar.setText("MODIFICAR");
         jbModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -162,20 +155,13 @@ public class ListaMateria extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtNombreActionPerformed
-
-    private void jtAñoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtAñoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtAñoActionPerformed
-
     private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
         
         FormularioMateria formularioMateria = new FormularioMateria();
         formularioMateria.setVisible(true);
         formularioMateria.setLocationRelativeTo(null);
         this.dispose();
+        
     }//GEN-LAST:event_jbAtrasActionPerformed
 
     private void jtListaMateriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListaMateriasMouseClicked
@@ -224,11 +210,27 @@ public class ListaMateria extends javax.swing.JFrame {
                             mate.setActivo(false);
                             break;
                     }
+                    materiadata.modificarMateria(mate);
                 }
             }
-            
+            borrarLista();
+            rellenarLista();
+            limpiar();
         }
     }//GEN-LAST:event_jbModificarActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        if (jtListaMaterias.getSelectedRow()!=-1) {
+            int fila = jtListaMaterias.getSelectedRow();
+            int id = (Integer) modelo.getValueAt(fila, 0);
+            materiadata.eliminarMateria(id);
+            borrarLista();
+            rellenarLista();
+            limpiar();
+        }else{
+            JOptionPane.showMessageDialog(null, "Debes de seleccionar una materia de la tabla");
+        }
+    }//GEN-LAST:event_jbEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -276,4 +278,15 @@ public class ListaMateria extends javax.swing.JFrame {
             modelo.removeRow(i);
         }
     }
+    
+    private void limpiar(){
+        
+        jtNombre.setText("");
+        jtAño.setText("");
+        jcEstado.setSelectedIndex(0);
+        
+    }
+    
 }
+
+

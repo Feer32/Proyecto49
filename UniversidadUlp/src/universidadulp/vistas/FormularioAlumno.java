@@ -84,6 +84,11 @@ public class FormularioAlumno extends javax.swing.JFrame {
         });
 
         jbSalir.setText("SALIR");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         jdFechaNac.setDateFormatString("dd MM yyyy");
 
@@ -221,11 +226,11 @@ public class FormularioAlumno extends javax.swing.JFrame {
     }//GEN-LAST:event_jtDocumentoActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        int documento = Integer.parseInt(jtDocumento.getText());
-        Alumno alu = new Alumno();
-        if (aluData.buscarAlumnoPorDni(documento) != null) {
-            alu = aluData.buscarAlumnoPorDni(documento);
-//            if (documento == alu.getDni()) {
+        if (!jtDocumento.getText().isEmpty()) {
+            int documento = Integer.parseInt(jtDocumento.getText());
+            Alumno alu = new Alumno();
+            if (aluData.buscarAlumnoPorDni(documento) != null) {
+                alu = aluData.buscarAlumnoPorDni(documento);
                 jtNombre.setText(alu.getNombre());
                 jtApellido.setText(alu.getApellido());
                 if (alu.isEstado() == true) {
@@ -238,12 +243,16 @@ public class FormularioAlumno extends javax.swing.JFrame {
 //         DateTimeFormatter formatoPatronFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
 //         System.out.println(alu.getFechaNac().format(formatoPatronFecha));
 //            }
-        } else {
-            jtDocumento.setText("");
-            jtNombre.setText("");
-            jtApellido.setText("");
-            jcEstado.setSelectedIndex(0);
-            jdFechaNac.setDate(null);
+
+            } else {
+                jtDocumento.setText("");
+                jtNombre.setText("");
+                jtApellido.setText("");
+                jcEstado.setSelectedIndex(0);
+                jdFechaNac.setDate(null);
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Ingrese un Documento ");
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
@@ -297,6 +306,14 @@ public class FormularioAlumno extends javax.swing.JFrame {
         
         this.dispose();
     }//GEN-LAST:event_jbListaActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        // TODO add your handling code here:
+        Principal pantalla = new Principal();
+        pantalla.setVisible(true);
+        pantalla.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
 
 
 //            if (jtDocumento.getText().isEmpty()

@@ -132,7 +132,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jbAdminisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdminisActionPerformed
         
-        Administracion pantalla = new Administracion();
+        FormularioInscr pantalla = new FormularioInscr();
         pantalla.setVisible(true);
         pantalla.setLocationRelativeTo(null);
         

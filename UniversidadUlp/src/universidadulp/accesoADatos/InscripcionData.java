@@ -146,7 +146,7 @@ public class InscripcionData {
         // CAMBIAR inscripcion.idmateria - inscripcion.idMateria CUIDADO SE ESCRIBIO MARTERIA
         String sql = "SELECT inscripcion.idMateria, nombre, año " +
                 "FROM inscripcion, materia " +
-                "WHERE inscripcion.idMateria = materia.idMateria and inscripcion.idAlumno = 1";
+                "WHERE inscripcion.idMateria = materia.idMateria and inscripcion.idAlumno = ?";
         try {
 
             PreparedStatement ps = conexion.prepareStatement(sql);

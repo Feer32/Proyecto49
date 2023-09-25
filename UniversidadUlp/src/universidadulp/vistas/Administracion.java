@@ -72,7 +72,7 @@ public class Administracion extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        Inscripciones pantalla = new Inscripciones();
+        FormularioInscr pantalla = new FormularioInscr();
         pantalla.setVisible(true);
         pantalla.setLocationRelativeTo(null);
         

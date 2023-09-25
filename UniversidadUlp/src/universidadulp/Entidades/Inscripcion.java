@@ -11,7 +11,7 @@ public class Inscripcion {
 
     public Inscripcion() {
     }
-
+    
     public Inscripcion(int IdInscripcion, Alumno alumno, Materia materia, double nota) {
         this.IdInscripcion = IdInscripcion;
         this.alumno = alumno;

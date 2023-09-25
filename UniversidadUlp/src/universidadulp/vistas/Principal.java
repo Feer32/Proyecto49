@@ -63,6 +63,11 @@ public class Principal extends javax.swing.JFrame {
 
         jbConsultas1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jbConsultas1.setText("SALIR");
+        jbConsultas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbConsultas1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -126,7 +131,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAdminisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdminisActionPerformed
-       
+        
         Administracion pantalla = new Administracion();
         pantalla.setVisible(true);
         pantalla.setLocationRelativeTo(null);
@@ -135,7 +140,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbAdminisActionPerformed
 
     private void jbAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlumnoActionPerformed
-       JOptionPane.showMessageDialog(this, "OK");
+       
         FormularioAlumno pantalla = new FormularioAlumno();
         pantalla.setVisible(true);
         pantalla.setLocationRelativeTo(null);
@@ -144,12 +149,18 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbAlumnoActionPerformed
 
     private void jbMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMateriaActionPerformed
+         
         FormularioMateria pantalla = new FormularioMateria();
         pantalla.setVisible(true);
         pantalla.setLocationRelativeTo(null);
         
         this.dispose();
     }//GEN-LAST:event_jbMateriaActionPerformed
+
+    private void jbConsultas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultas1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jbConsultas1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

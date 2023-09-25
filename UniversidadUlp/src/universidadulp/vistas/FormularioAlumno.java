@@ -226,6 +226,7 @@ public class FormularioAlumno extends javax.swing.JFrame {
     }//GEN-LAST:event_jtDocumentoActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+       try{
         if (!jtDocumento.getText().isEmpty()) {
             int documento = Integer.parseInt(jtDocumento.getText());
             Alumno alu = new Alumno();
@@ -239,10 +240,10 @@ public class FormularioAlumno extends javax.swing.JFrame {
                     jcEstado.setSelectedIndex(2);
                 }
                 jdFechaNac.setDate(Date.valueOf(alu.getFechaNac()));
+                
 //         Formato Argentino para mostrar la fecha     
 //         DateTimeFormatter formatoPatronFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
 //         System.out.println(alu.getFechaNac().format(formatoPatronFecha));
-//            }
 
             } else {
                 jtDocumento.setText("");
@@ -254,6 +255,10 @@ public class FormularioAlumno extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(this, "Ingrese un Documento ");
         }
+       }catch(NumberFormatException e){
+           JOptionPane.showMessageDialog(this, "INSERTE SOLO NUMEROS PORFAVOR");
+           jtDocumento.setText("");
+       }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed

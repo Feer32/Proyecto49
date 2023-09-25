@@ -194,7 +194,7 @@ public class FormularioMateria extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-      
+        try{
         if(!jtCodigo.getText().isEmpty()){
         int codigo = Integer.parseInt(jtCodigo.getText());
         Materia mate = new Materia();
@@ -220,6 +220,10 @@ public class FormularioMateria extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(this, "Ingrese un Codigo ");
         }
+        }catch(NumberFormatException e){
+         JOptionPane.showMessageDialog(this, "INGRESAR SOLO NUMEROS PORFAVOR");
+         jtCodigo.setText("");
+        }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jtLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtLimpiarActionPerformed
@@ -232,6 +236,7 @@ public class FormularioMateria extends javax.swing.JFrame {
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         // TODO add your handling code here:
+        try{
         if (jtNombre.getText().isEmpty()
                 || jtAño.getText().isEmpty()
                 || jcEstado.getSelectedIndex() == 0) {
@@ -247,7 +252,10 @@ public class FormularioMateria extends javax.swing.JFrame {
                }
                mateData.guardarMateria(materia);
                 }
-       
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Porfavor ingrese solo numeros en el Año");
+            jtAño.setText("");
+        }
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed

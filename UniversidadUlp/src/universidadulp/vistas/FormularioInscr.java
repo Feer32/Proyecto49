@@ -282,17 +282,18 @@ InscripcionData inscripcionData=new InscripcionData();
 
             if (!jtfBucarDni.getText().isEmpty()) {
 
-                Alumno alumnoSeleccioado = aluData.buscarAlumnoPorDni(Integer.parseInt(jtfBucarDni.getText()));
+                Alumno alumnoSeleccionado = aluData.buscarAlumnoPorDni(Integer.parseInt(jtfBucarDni.getText()));
 //             jcSelecAlumno.setSelectedItem(alumnoSeleccioado);
-                if (alumnoSeleccioado == null) {
+                if (alumnoSeleccionado == null) {
                     jtfBucarDni.setText("");
                 } else {
                     int contador = -1;
                     for (Alumno alumno : aluData.listarAlumnosActivos()) {
                         contador += 1;
-                        if (alumno.getIdAlumno() == alumnoSeleccioado.getIdAlumno()) {
+                        if (alumno.getIdAlumno() == alumnoSeleccionado.getIdAlumno()) {
                             jcSelecAlumno.setSelectedIndex(contador);
                             jtfBucarDni.setText("");
+                            break;
                         }
                     }
                 }
@@ -373,12 +374,13 @@ InscripcionData inscripcionData=new InscripcionData();
         this.dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
     
-    private int numero=0;
+//    private int numero=0;
     private void jcSelecAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcSelecAlumnoActionPerformed
-        numero += 1;
+        int numero = 1;
         if (jrbMateriasInsc.isSelected() == false && 
-            jrbMateriaNoInsc.isSelected() == false &&
-            numero >= 2) {
+            jrbMateriaNoInsc.isSelected() == false ) {
+//                &&
+//            numero >= 2) {
             JOptionPane.showMessageDialog(this, "Seleccione si desea una lista de materias a las que esta inscripto o no");
         } else {
             if (jrbMateriasInsc.isSelected() == true && numero >= 2) {

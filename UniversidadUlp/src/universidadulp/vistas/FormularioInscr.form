@@ -337,11 +337,6 @@
         <Component class="javax.swing.JTextField" name="jtfBucarDni">
         </Component>
         <Component class="javax.swing.JButton" name="jbIconoBuscar">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\angel\Desktop\GitHub\Proyecto49\UniversidadUlp\LUPITA.png"/>
-            </Property>
-          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbIconoBuscarActionPerformed"/>
           </Events>

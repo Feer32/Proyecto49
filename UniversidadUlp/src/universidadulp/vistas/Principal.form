@@ -51,6 +51,7 @@
             </TitledBorder>
           </Border>
         </Property>
+        <Property name="opaque" type="boolean" value="false"/>
       </Properties>
 
       <Layout>
@@ -63,7 +64,7 @@
                       <Component id="jbAlumno" alignment="1" max="32767" attributes="0"/>
                       <Component id="jbMateria" alignment="1" max="32767" attributes="0"/>
                       <Component id="jbConsultas" alignment="1" max="32767" attributes="0"/>
-                      <Component id="jbConsultas1" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jbSalir" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="104" max="32767" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="168" max="-2" attributes="0"/>
@@ -92,7 +93,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jbConsultas" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="jbConsultas1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbSalir" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -165,6 +166,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Imagenes/emI.png"/>
+            </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[170, 207]"/>
             </Property>
@@ -173,7 +177,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jbConsultas1">
+        <Component class="javax.swing.JButton" name="jbSalir">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="18" style="1"/>
@@ -181,7 +185,7 @@
             <Property name="text" type="java.lang.String" value="SALIR"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbConsultas1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbSalirActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

@@ -1,27 +1,35 @@
 package universidadulp.vistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import universidadulp.Entidades.Materia;
 import universidadulp.accesoADatos.MateriaData;
 
 public class ListaMateria extends javax.swing.JFrame {
-    
+
     MateriaData materiadata = new MateriaData();
-    
+    Fondopantalla frame = new Fondopantalla();
+
     public ListaMateria() {
+        this.setContentPane(frame);
         initComponents();
         armarCabecera();
         rellenarLista();
+        jbEliminar.setToolTipText("Permite Eliminar un Materia anteriormente seleccionado en la Lista");
+        jbModificar.setToolTipText("Permite Modificar un Materia anteriormente seleccionado en la Lista");
     }
-    
+
     public DefaultTableModel modelo = new DefaultTableModel() {
-        
+
         public boolean isCellEditable(int fila, int columna) {
             return false;
         }
     };
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -38,8 +46,11 @@ public class ListaMateria extends javax.swing.JFrame {
         jbAtras = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jbModificar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setOpaque(false);
 
         jtListaMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -88,44 +99,60 @@ public class ListaMateria extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel6.setText("Lista de Materia");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addGap(61, 61, 61)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtAño, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbEliminar))
-                .addGap(94, 94, 94))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(jbAtras)
+                .addGap(153, 153, 153)
+                .addComponent(jbEliminar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbModificar)
                 .addGap(64, 64, 64))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
+                        .addGap(67, 67, 67)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtAño, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(212, 212, 212))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(61, 61, 61)
+                        .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(94, 94, 94))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(265, 265, 265)
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(43, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
@@ -156,16 +183,16 @@ public class ListaMateria extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
-        
+
         FormularioMateria formularioMateria = new FormularioMateria();
         formularioMateria.setVisible(true);
         formularioMateria.setLocationRelativeTo(null);
         this.dispose();
-        
+
     }//GEN-LAST:event_jbAtrasActionPerformed
 
     private void jtListaMateriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListaMateriasMouseClicked
-        
+
         int fila = jtListaMaterias.getSelectedRow();
         Materia materia = new Materia();
         int dato = (Integer) modelo.getValueAt(fila, 0);
@@ -178,30 +205,30 @@ public class ListaMateria extends javax.swing.JFrame {
             } else {
                 jcEstado.setSelectedIndex(2);
             }
-            
+
         }
     }//GEN-LAST:event_jtListaMateriasMouseClicked
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
-        
+
         if (jtNombre.getText().isEmpty()
                 || jtAño.getText().isEmpty()
                 || jcEstado.getSelectedIndex() == 0
                 || jtListaMaterias.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Flac@ sseleccioname la materia porfis");
         } else {
-            
+
             int fila = jtListaMaterias.getSelectedRow();
-            
+
             int data = (Integer) modelo.getValueAt(fila, 0);
-            
+
             for (Materia mate : materiadata.listarMaterias()) {
                 if (mate.getIdMateria() == data) {
                     mate.setNombre(jtNombre.getText());
                     mate.setAnio(Integer.parseInt(jtAño.getText()));
-                    
+
                     mate.setIdMateria(data);
-                    
+
                     switch (jcEstado.getSelectedIndex()) {
                         case 1:
                             mate.setActivo(true);
@@ -220,14 +247,14 @@ public class ListaMateria extends javax.swing.JFrame {
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-        if (jtListaMaterias.getSelectedRow()!=-1) {
+        if (jtListaMaterias.getSelectedRow() != -1) {
             int fila = jtListaMaterias.getSelectedRow();
             int id = (Integer) modelo.getValueAt(fila, 0);
             materiadata.eliminarMateria(id);
             borrarLista();
             rellenarLista();
             limpiar();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Debes de seleccionar una materia de la tabla");
         }
     }//GEN-LAST:event_jbEliminarActionPerformed
@@ -237,6 +264,7 @@ public class ListaMateria extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbAtras;
@@ -249,19 +277,19 @@ public class ListaMateria extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void armarCabecera() {
-        
+
         modelo.addColumn("Codigo");
         modelo.addColumn("Nombre");
         modelo.addColumn("Año");
         modelo.addColumn("Estado");
-        
+
         jtListaMaterias.setModel(modelo);
     }
-    
+
     private void rellenarLista() {
-        
+
         for (Materia listarMateria : materiadata.listarMaterias()) {
-            
+
             modelo.addRow(new Object[]{
                 listarMateria.getIdMateria(),
                 listarMateria.getNombre(),
@@ -270,23 +298,34 @@ public class ListaMateria extends javax.swing.JFrame {
             });
         }
     }
-    
+
     private void borrarLista() {
-        
+
         int fila = modelo.getRowCount() - 1;
         for (int i = fila; i >= 0; i--) {
             modelo.removeRow(i);
         }
     }
-    
-    private void limpiar(){
-        
+
+    private void limpiar() {
+
         jtNombre.setText("");
         jtAño.setText("");
         jcEstado.setSelectedIndex(0);
-        
+
     }
-    
+
+    public class Fondopantalla extends JPanel {
+
+        private Image imagen;
+
+        @Override
+        public void paint(Graphics g) {
+
+            imagen = new ImageIcon(getClass().getResource("/imagenes/panel.jpg")).getImage();
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+        }
+    }
 }
-
-

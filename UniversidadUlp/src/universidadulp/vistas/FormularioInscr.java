@@ -1,6 +1,10 @@
 package universidadulp.vistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import universidadulp.Entidades.Alumno;
 import universidadulp.Entidades.Inscripcion;
@@ -8,16 +12,26 @@ import universidadulp.Entidades.Materia;
 import universidadulp.accesoADatos.AlumnoData;
 import universidadulp.accesoADatos.InscripcionData;
 import universidadulp.accesoADatos.MateriaData;
+import universidadulp.vistas.Consulta.Fondopantalla;
 
 public class FormularioInscr extends javax.swing.JFrame {
 
     AlumnoData aluData = new AlumnoData();
     MateriaData materiadata = new MateriaData();
     InscripcionData inscripcionData = new InscripcionData();
+    Fondopantalla frame = new Fondopantalla();
 
     public FormularioInscr() {
+        this.setContentPane(frame);
         initComponents();
         llenarCombo();
+        jrbMateriasInsc.setSelected(true);
+        jbInscribir.setVisible(false);
+        jbInscribir.setToolTipText("Permite inscribir un Alumno en una materia previamente seleccionado");
+        jbAnularInscripcion.setToolTipText("Permite quitar la inscripcion de un Alumno previamente seleccionado");
+        jbNota.setToolTipText("Permite modificar la nota de un Alumno inscripto previamente seleccionado");
+        jbIconoBuscar.setToolTipText("Busca alumnos por DNI");
+
 //        crearCabecera();
     }
     public DefaultTableModel modelo = new DefaultTableModel() {
@@ -61,6 +75,8 @@ public class FormularioInscr extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setOpaque(false);
+
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel2.setText("FORMULARIO DE INSCRIPCIÓN");
 
@@ -73,6 +89,7 @@ public class FormularioInscr extends javax.swing.JFrame {
         });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.setOpaque(false);
 
         jtTablaInsc.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jtTablaInsc.setModel(new javax.swing.table.DefaultTableModel(
@@ -127,7 +144,7 @@ public class FormularioInscr extends javax.swing.JFrame {
         });
 
         jbSalir.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jbSalir.setText("SALIR");
+        jbSalir.setText("ATRAS");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSalirActionPerformed(evt);
@@ -541,4 +558,17 @@ public class FormularioInscr extends javax.swing.JFrame {
 
     }
 
+    public class Fondopantalla extends JPanel {
+
+        private Image imagen;
+
+        @Override
+        public void paint(Graphics g) {
+
+            imagen = new ImageIcon(getClass().getResource("/imagenes/panel.jpg")).getImage();
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+        }
+    }
 }

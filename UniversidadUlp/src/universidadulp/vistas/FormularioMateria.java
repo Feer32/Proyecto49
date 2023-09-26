@@ -1,15 +1,25 @@
 package universidadulp.vistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import universidadulp.Entidades.Materia;
 import universidadulp.accesoADatos.MateriaData;
 
 public class FormularioMateria extends javax.swing.JFrame {
 
     MateriaData mateData = new MateriaData();
+    Fondopantalla frame = new Fondopantalla();
 
     public FormularioMateria() {
+        this.setContentPane(frame);
         initComponents();
+        jbBuscar.setToolTipText("Buscar una materia utilizando el Codigo(id) de la misma");
+        jbListaMateria.setToolTipText("Permite visualizar la lista de materias completa permitiendo modificar el que desee");
+        jbNuevo.setToolTipText("Permite registrar una Materia con los datos previamente ingresados en las casillas");
+        jbLimpiar.setToolTipText("Flac@ el boton dice lo que hace");
     }
 
     @SuppressWarnings("unchecked")
@@ -30,17 +40,19 @@ public class FormularioMateria extends javax.swing.JFrame {
         jbNuevo = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jbBuscar = new javax.swing.JButton();
-        jtLimpiar = new javax.swing.JButton();
+        jbLimpiar = new javax.swing.JButton();
         jbListaMateria = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATOS MATERIA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 102, 0))); // NOI18N
+        jPanel1.setOpaque(false);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
         jLabel1.setText("MATERIA");
 
         jPanel2.setBorder(new javax.swing.border.MatteBorder(null));
+        jPanel2.setOpaque(false);
 
         jLabel2.setText("CÓDIGO:");
 
@@ -59,7 +71,7 @@ public class FormularioMateria extends javax.swing.JFrame {
             }
         });
 
-        jbSalir.setText("SALIR");
+        jbSalir.setText("ATRAS");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSalirActionPerformed(evt);
@@ -73,10 +85,10 @@ public class FormularioMateria extends javax.swing.JFrame {
             }
         });
 
-        jtLimpiar.setText("LIMPIAR");
-        jtLimpiar.addActionListener(new java.awt.event.ActionListener() {
+        jbLimpiar.setText("LIMPIAR");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtLimpiarActionPerformed(evt);
+                jbLimpiarActionPerformed(evt);
             }
         });
 
@@ -119,7 +131,7 @@ public class FormularioMateria extends javax.swing.JFrame {
                                             .addComponent(jcEstado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jtLimpiar))
+                                        .addComponent(jbLimpiar))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -146,7 +158,7 @@ public class FormularioMateria extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtLimpiar))
+                    .addComponent(jbLimpiar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevo)
@@ -194,65 +206,65 @@ public class FormularioMateria extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        try{
-        if(!jtCodigo.getText().isEmpty()){
-        int codigo = Integer.parseInt(jtCodigo.getText());
-        Materia mate = new Materia();
-        if (mateData.buscarMateria(codigo) != null) {
+        try {
+            if (!jtCodigo.getText().isEmpty()) {
+                int codigo = Integer.parseInt(jtCodigo.getText());
+                Materia mate = new Materia();
+                if (mateData.buscarMateria(codigo) != null) {
 
-            mate = mateData.buscarMateria(codigo);
-            jtNombre.setText(mate.getNombre());
-            jtAño.setText(mate.getAnio() + "");
+                    mate = mateData.buscarMateria(codigo);
+                    jtNombre.setText(mate.getNombre());
+                    jtAño.setText(mate.getAnio() + "");
 
-            if (mate.isActivo() == true) {
-             jcEstado.setSelectedIndex(1);
+                    if (mate.isActivo() == true) {
+                        jcEstado.setSelectedIndex(1);
+                    } else {
+                        jcEstado.setSelectedIndex(2);
+                    }
+
+                } else {
+                    jtNombre.setText("");
+                    jtAño.setText("");
+                    jcEstado.setSelectedIndex(0);
+                    jtCodigo.setText("");
+                }
+
             } else {
-             jcEstado.setSelectedIndex(2);
+                JOptionPane.showMessageDialog(this, "Ingrese un Codigo ");
             }
-            
-        }else{
-           jtNombre.setText("");
-           jtAño.setText("");
-           jcEstado.setSelectedIndex(0);
-           jtCodigo.setText("");
-        }
-        
-        }else{
-            JOptionPane.showMessageDialog(this, "Ingrese un Codigo ");
-        }
-        }catch(NumberFormatException e){
-         JOptionPane.showMessageDialog(this, "INGRESAR SOLO NUMEROS PORFAVOR");
-         jtCodigo.setText("");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "INGRESAR SOLO NUMEROS PORFAVOR");
+            jtCodigo.setText("");
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
-    private void jtLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtLimpiarActionPerformed
-       
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+
         jtNombre.setText("");
-           jtAño.setText("");
-           jcEstado.setSelectedIndex(0);
-           jtCodigo.setText("");
-    }//GEN-LAST:event_jtLimpiarActionPerformed
+        jtAño.setText("");
+        jcEstado.setSelectedIndex(0);
+        jtCodigo.setText("");
+    }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         // TODO add your handling code here:
-        try{
-        if (jtNombre.getText().isEmpty()
-                || jtAño.getText().isEmpty()
-                || jcEstado.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(this, "RELLENAME TODOS LOS CAMPOS FLAC@!!");
-        } else {
-               Materia materia = new Materia();
-               materia.setNombre(jtNombre.getText());
-               materia.setAnio(Integer.parseInt(jtAño.getText()));
-               if (jcEstado.getSelectedIndex()==1) {
-                   materia.setActivo(true);
-                }else{
-                   materia.setActivo(false);
-               }
-               mateData.guardarMateria(materia);
+        try {
+            if (jtNombre.getText().isEmpty()
+                    || jtAño.getText().isEmpty()
+                    || jcEstado.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(this, "RELLENAME TODOS LOS CAMPOS FLAC@!!");
+            } else {
+                Materia materia = new Materia();
+                materia.setNombre(jtNombre.getText());
+                materia.setAnio(Integer.parseInt(jtAño.getText()));
+                if (jcEstado.getSelectedIndex() == 1) {
+                    materia.setActivo(true);
+                } else {
+                    materia.setActivo(false);
                 }
-        }catch(NumberFormatException e){
+                mateData.guardarMateria(materia);
+            }
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Porfavor ingrese solo numeros en el Año");
             jtAño.setText("");
         }
@@ -284,14 +296,27 @@ public class FormularioMateria extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbLimpiar;
     private javax.swing.JButton jbListaMateria;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<String> jcEstado;
     private javax.swing.JTextField jtAño;
     private javax.swing.JTextField jtCodigo;
-    private javax.swing.JButton jtLimpiar;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
- 
+
+    public class Fondopantalla extends JPanel {
+
+        private Image imagen;
+
+        @Override
+        public void paint(Graphics g) {
+
+            imagen = new ImageIcon(getClass().getResource("/imagenes/panel.jpg")).getImage();
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+        }
+    }
 }

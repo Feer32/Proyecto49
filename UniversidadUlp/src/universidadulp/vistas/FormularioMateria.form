@@ -42,6 +42,7 @@
             </TitledBorder>
           </Border>
         </Property>
+        <Property name="opaque" type="boolean" value="false"/>
       </Properties>
 
       <Layout>
@@ -90,6 +91,7 @@
                 <MatteColorBorder/>
               </Border>
             </Property>
+            <Property name="opaque" type="boolean" value="false"/>
           </Properties>
 
           <Layout>
@@ -127,7 +129,7 @@
                                                   <Component id="jtNombre" min="-2" pref="218" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="jtLimpiar" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jbLimpiar" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" attributes="0">
                                               <Component id="jtCodigo" min="-2" pref="94" max="-2" attributes="0"/>
@@ -166,7 +168,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jcEstado" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jtLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="63" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -230,7 +232,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="jbSalir">
               <Properties>
-                <Property name="text" type="java.lang.String" value="SALIR"/>
+                <Property name="text" type="java.lang.String" value="ATRAS"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbSalirActionPerformed"/>
@@ -244,12 +246,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbBuscarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jtLimpiar">
+            <Component class="javax.swing.JButton" name="jbLimpiar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="LIMPIAR"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtLimpiarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbLimpiarActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbListaMateria">

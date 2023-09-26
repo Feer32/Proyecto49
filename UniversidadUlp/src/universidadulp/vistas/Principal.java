@@ -1,11 +1,23 @@
 package universidadulp.vistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class Principal extends javax.swing.JFrame {
 
+    Fondopantalla frame = new Fondopantalla();
+    
     public Principal() {
+        this.setContentPane(frame);
         initComponents();
+        jbAlumno.setToolTipText("Puedes agregar y/o Modificar Alumno");
+        jbMateria.setToolTipText("Puedes agregar y/o Modificar Materia");
+        jbAdminis.setToolTipText("Puedes Inscribir Alumnos en las diferentes Materias");
+        jbConsultas.setToolTipText("Puedes controlar la cantidad de Alumnos por Materia");
+
     }
 
     @SuppressWarnings("unchecked")
@@ -19,11 +31,12 @@ public class Principal extends javax.swing.JFrame {
         jbAdminis = new javax.swing.JButton();
         jbConsultas = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jbConsultas1 = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), "PROYECTO49", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 204, 255))); // NOI18N
+        jPanel1.setOpaque(false);
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Footlight MT Light", 1, 36)); // NOI18N
@@ -62,14 +75,15 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/emI.png"))); // NOI18N
         jLabel2.setMaximumSize(new java.awt.Dimension(170, 207));
         jLabel2.setPreferredSize(new java.awt.Dimension(1125, 1022));
 
-        jbConsultas1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jbConsultas1.setText("SALIR");
-        jbConsultas1.addActionListener(new java.awt.event.ActionListener() {
+        jbSalir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jbSalir.setText("SALIR");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbConsultas1ActionPerformed(evt);
+                jbSalirActionPerformed(evt);
             }
         });
 
@@ -84,7 +98,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jbAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbMateria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbConsultas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbConsultas1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jbSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(91, 91, 91))
@@ -109,7 +123,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jbConsultas)
                         .addGap(24, 24, 24)
-                        .addComponent(jbConsultas1))
+                        .addComponent(jbSalir))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -135,42 +149,42 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAdminisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdminisActionPerformed
-        
+
         FormularioInscr pantalla = new FormularioInscr();
         pantalla.setVisible(true);
         pantalla.setLocationRelativeTo(null);
-        
+
         this.dispose();
     }//GEN-LAST:event_jbAdminisActionPerformed
 
     private void jbAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlumnoActionPerformed
-       
+
         FormularioAlumno pantalla = new FormularioAlumno();
         pantalla.setVisible(true);
         pantalla.setLocationRelativeTo(null);
-        
+
         this.dispose();
     }//GEN-LAST:event_jbAlumnoActionPerformed
 
     private void jbMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMateriaActionPerformed
-         
+
         FormularioMateria pantalla = new FormularioMateria();
         pantalla.setVisible(true);
         pantalla.setLocationRelativeTo(null);
-        
+
         this.dispose();
     }//GEN-LAST:event_jbMateriaActionPerformed
 
-    private void jbConsultas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultas1ActionPerformed
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jbConsultas1ActionPerformed
+    }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultasActionPerformed
         Consulta pantalla = new Consulta();
         pantalla.setVisible(true);
         pantalla.setLocationRelativeTo(null);
-        
+
         this.dispose();
     }//GEN-LAST:event_jbConsultasActionPerformed
 
@@ -182,8 +196,21 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jbAdminis;
     private javax.swing.JButton jbAlumno;
     private javax.swing.JButton jbConsultas;
-    private javax.swing.JButton jbConsultas1;
     private javax.swing.JButton jbMateria;
+    private javax.swing.JButton jbSalir;
     // End of variables declaration//GEN-END:variables
 
+    public class Fondopantalla extends JPanel {
+
+        private Image imagen;
+
+        @Override
+        public void paint(Graphics g) {
+
+            imagen = new ImageIcon(getClass().getResource("/imagenes/panel.jpg")).getImage();
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+        }
+    }
 }

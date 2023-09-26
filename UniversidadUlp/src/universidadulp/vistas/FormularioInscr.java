@@ -46,8 +46,8 @@ public class FormularioInscr extends javax.swing.JFrame {
         jbInscribir = new javax.swing.JButton();
         jbAnularInscripcion = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        jbNota = new javax.swing.JButton();
+        jtNota = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jtfBucarDni = new javax.swing.JTextField();
         jbIconoBuscar = new javax.swing.JButton();
@@ -86,6 +86,11 @@ public class FormularioInscr extends javax.swing.JFrame {
 
             }
         ));
+        jtTablaInsc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtTablaInscMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtTablaInsc);
 
         jrbMateriaNoInsc.setText("Materias No Inscriptas");
@@ -129,7 +134,12 @@ public class FormularioInscr extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("ACTUALIZAR NOTA");
+        jbNota.setText("ACTUALIZAR NOTA");
+        jbNota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNotaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -139,9 +149,9 @@ public class FormularioInscr extends javax.swing.JFrame {
                 .addGap(43, 43, 43)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jbNota)
                         .addGap(31, 31, 31)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtNota, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -187,8 +197,8 @@ public class FormularioInscr extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbNota)
+                            .addComponent(jtNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jbSalir))))
                 .addGap(16, 16, 16))
         );
@@ -317,6 +327,9 @@ public class FormularioInscr extends javax.swing.JFrame {
             jrbMateriaNoInsc.setSelected(false);
             jbInscribir.setVisible(false);
             jbAnularInscripcion.setVisible(true);
+            jbNota.setVisible(true);
+            jtNota.setVisible(true);
+
 //        
             cargarMateriasInscriptas();
         }
@@ -329,6 +342,8 @@ public class FormularioInscr extends javax.swing.JFrame {
             jrbMateriasInsc.setSelected(false);
             jbInscribir.setVisible(true);
             jbAnularInscripcion.setVisible(false);
+            jbNota.setVisible(false);
+            jtNota.setVisible(false);
 //          
             cargarMateriasNOInscriptas();
         }
@@ -367,6 +382,7 @@ public class FormularioInscr extends javax.swing.JFrame {
                 inscripcionData.eliminarInscripcionMateriaAlumno(alumno.getIdAlumno(), materia.getIdMateria());
 //                
                 cargarMateriasInscriptas();
+                jtNota.setText("");
             }
         }
     }//GEN-LAST:event_jbAnularInscripcionActionPerformed
@@ -400,8 +416,37 @@ public class FormularioInscr extends javax.swing.JFrame {
         numero = 2;
     }//GEN-LAST:event_jcSelecAlumnoActionPerformed
 
+    private void jtTablaInscMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTablaInscMouseClicked
+        if (jrbMateriaNoInsc.isSelected() == false
+                && jrbMateriasInsc.isSelected() == true) {
+            int fila = jtTablaInsc.getSelectedRow();
+            double dato = (Double) modelo.getValueAt(fila, 3);
+            jtNota.setText(dato + "");
+        }
+    }//GEN-LAST:event_jtTablaInscMouseClicked
+
+    private void jbNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNotaActionPerformed
+
+        try {
+            Alumno alumno = (Alumno) jcSelecAlumno.getSelectedItem();
+            int fila = jtTablaInsc.getSelectedRow();
+            if (fila != -1) {
+                int dato = (Integer) modelo.getValueAt(fila, 0);
+                Materia materia = materiadata.buscarMateria(dato);
+                double nota = Double.parseDouble(jtNota.getText());
+                inscripcionData.actualizarNota(alumno.getIdAlumno(), materia.getIdMateria(), nota);
+                cargarMateriasInscriptas();
+                jtNota.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Flac@ Seleccioname una materia!!");
+            }
+        } catch (NumberFormatException i) {
+            JOptionPane.showMessageDialog(this, "Flac@ solo puedes ingresar numeros!!");
+        }
+
+    }//GEN-LAST:event_jbNotaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -411,14 +456,15 @@ public class FormularioInscr extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton jbAnularInscripcion;
     private javax.swing.JButton jbIconoBuscar;
     private javax.swing.JButton jbInscribir;
+    private javax.swing.JButton jbNota;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Alumno> jcSelecAlumno;
     private javax.swing.JRadioButton jrbMateriaNoInsc;
     private javax.swing.JRadioButton jrbMateriasInsc;
+    private javax.swing.JTextField jtNota;
     private javax.swing.JTable jtTablaInsc;
     private javax.swing.JTextField jtfBucarDni;
     // End of variables declaration//GEN-END:variables
@@ -464,6 +510,13 @@ public class FormularioInscr extends javax.swing.JFrame {
         }
     }
 
+    private void borrarColumnas() {
+
+        while (modelo.getColumnCount() > 0) {
+            modelo.setColumnCount(modelo.getColumnCount() - 1);
+        }
+    }
+
     private void borrarLista() {
         int fila = jtTablaInsc.getRowCount() - 1;
         if (fila != -1) {
@@ -486,14 +539,6 @@ public class FormularioInscr extends javax.swing.JFrame {
         modelo.addColumn("Nota");
         jtTablaInsc.setModel(modelo);
 
-    }
-
-    private void borrarColumnas() {
-
-        while (modelo.getColumnCount() > 0) {
-            modelo.setColumnCount(modelo.getColumnCount() - 1);
-            System.out.println(modelo.getColumnCount());
-        }
     }
 
 }

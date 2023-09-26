@@ -56,8 +56,12 @@ public class Principal extends javax.swing.JFrame {
 
         jbConsultas.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jbConsultas.setText("CONSULTAS");
+        jbConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbConsultasActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\angel\\Desktop\\GitHub\\Proyecto49\\UniversidadUlp\\emI.png")); // NOI18N
         jLabel2.setMaximumSize(new java.awt.Dimension(170, 207));
         jLabel2.setPreferredSize(new java.awt.Dimension(1125, 1022));
 
@@ -161,6 +165,14 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jbConsultas1ActionPerformed
+
+    private void jbConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultasActionPerformed
+        Consulta pantalla = new Consulta();
+        pantalla.setVisible(true);
+        pantalla.setLocationRelativeTo(null);
+        
+        this.dispose();
+    }//GEN-LAST:event_jbConsultasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

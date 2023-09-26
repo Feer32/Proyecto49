@@ -150,4 +150,27 @@ public class MateriaData {
         }
         return materias;
     }
+        
+           public List<Materia> listarMateriasActivo() {
+
+        List<Materia> materias = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM materia WHERE activo = 1";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Materia materia = new Materia();
+                materia.setIdMateria(rs.getInt("idMateria"));
+                materia.setNombre(rs.getString("nombre"));
+                materia.setAnio(rs.getInt("año"));
+                materia.setActivo(rs.getBoolean("activo"));
+                materias.add(materia);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla de las materias." + ex.getMessage());
+        }
+        return materias;
+    }
 }

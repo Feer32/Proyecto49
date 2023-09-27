@@ -1,11 +1,13 @@
 package universidadulp.vistas;
 
-
+import com.sun.source.tree.BreakTree;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.sql.Date;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -16,14 +18,15 @@ public class FormularioAlumno extends javax.swing.JFrame {
 
     AlumnoData aluData = new AlumnoData();
     Fondopantalla frame = new Fondopantalla();
+
     public FormularioAlumno() {
         this.setContentPane(frame);
-        initComponents(); 
+        initComponents();
         jbBuscar.setToolTipText("Para buscar un Alumno debe Ingresar un Dni en la casilla -Documento-");
         jbLista.setToolTipText("Permite visualizar la lista de alumnos completa permitiendo modificar el que desee");
         jbNuevo.setToolTipText("Permite registrar un Alumno con los datos previamente ingresados en las casillas");
         jbLimpiar.setToolTipText("Flac@ el boton dice lo que hace");
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -274,81 +277,120 @@ public class FormularioAlumno extends javax.swing.JFrame {
     }//GEN-LAST:event_jtDocumentoActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-       try{
-        if (!jtDocumento.getText().isEmpty()) {
-            int documento = Integer.parseInt(jtDocumento.getText());
-            Alumno alu = new Alumno();
-            if (aluData.buscarAlumnoPorDni(documento) != null) {
-                alu = aluData.buscarAlumnoPorDni(documento);
-                jtNombre.setText(alu.getNombre());
-                jtApellido.setText(alu.getApellido());
-                if (alu.isEstado() == true) {
-                    jcEstado.setSelectedIndex(1);
-                } else {
-                    jcEstado.setSelectedIndex(2);
-                }
-                jdFechaNac.setDate(Date.valueOf(alu.getFechaNac()));
-                
+        try {
+            if (!jtDocumento.getText().isEmpty()) {
+                int documento = Integer.parseInt(jtDocumento.getText());
+                Alumno alu = new Alumno();
+                if (aluData.buscarAlumnoPorDni(documento) != null) {
+                    alu = aluData.buscarAlumnoPorDni(documento);
+                    jtNombre.setText(alu.getNombre());
+                    jtApellido.setText(alu.getApellido());
+                    if (alu.isEstado() == true) {
+                        jcEstado.setSelectedIndex(1);
+                    } else {
+                        jcEstado.setSelectedIndex(2);
+                    }
+                    jdFechaNac.setDate(Date.valueOf(alu.getFechaNac()));
+
 //         Formato Argentino para mostrar la fecha     
 //         DateTimeFormatter formatoPatronFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
 //         System.out.println(alu.getFechaNac().format(formatoPatronFecha));
-
+                } else {
+                    jtDocumento.setText("");
+                    jtNombre.setText("");
+                    jtApellido.setText("");
+                    jcEstado.setSelectedIndex(0);
+                    jdFechaNac.setDate(null);
+                }
             } else {
-                jtDocumento.setText("");
-                jtNombre.setText("");
-                jtApellido.setText("");
-                jcEstado.setSelectedIndex(0);
-                jdFechaNac.setDate(null);
+                JOptionPane.showMessageDialog(this, "Ingrese un Documento ");
             }
-        }else{
-            JOptionPane.showMessageDialog(this, "Ingrese un Documento ");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "INSERTE SOLO NUMEROS PORFAVOR");
+            jtDocumento.setText("");
         }
-       }catch(NumberFormatException e){
-           JOptionPane.showMessageDialog(this, "INSERTE SOLO NUMEROS PORFAVOR");
-           jtDocumento.setText("");
-       }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         // TODO add your handling code here:
-        if (jtDocumento.getText().isEmpty() || 
-            jtNombre.getText().isEmpty() || 
-            jtApellido.getText().isEmpty() || 
-            jcEstado.getSelectedIndex() == 0 || 
-            jdFechaNac.getDate() == null) {
-             JOptionPane.showMessageDialog(this, "RELLENAME TODOS LOS CAMPO FLAC@!!");
-        }else {
-            AlumnoData alu = new AlumnoData();
-            int repetido=0;
-            for (Alumno alumno : alu.listaCompletaDeAlumnos()) {
-                if(alumno.getDni() == Integer.parseInt(jtDocumento.getText())){
-                    JOptionPane.showMessageDialog(this, "No pueden existir alumnos con el mismo DOCUMENTO");
-                    repetido=1;
+        int error = 0;
+        try {
+            if (jtDocumento.getText().isEmpty()
+                    || jtNombre.getText().isEmpty()
+                    || jtApellido.getText().isEmpty()
+                    || jcEstado.getSelectedIndex() == 0
+                    || jdFechaNac.getDate() == null) {
+                if (jdFechaNac.getDate() == null) {
+                    JOptionPane.showMessageDialog(this, "La fecha fue ingresada incorrectamente porfavor"
+                            + " utilice el calendario al lado de la casilla Fecha de Nacimiento");
+                } else {
+                    JOptionPane.showMessageDialog(this, "FLAC@!! RELLENA CORRECTAMENTE LAS CASILLAS");
+                }
+            } else {
+                AlumnoData alu = new AlumnoData();
+                int repetido = 0;
+                for (Alumno alumno : alu.listaCompletaDeAlumnos()) {
+                    if (alumno.getDni() == Integer.parseInt(jtDocumento.getText())) {
+                        JOptionPane.showMessageDialog(this, "No pueden existir alumnos con el mismo DOCUMENTO");
+                       jtDocumento.setText("");
+                        repetido = 1;
+                    }
+                }
+                if (repetido == 0) {
+
+                    Alumno alumno = new Alumno();
+                    if (soloLetras(jtNombre.getText()) == true) {
+                        alumno.setNombre(jtNombre.getText());
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Error de tipeo en la casilla NOMBRE");
+                        jtNombre.setText("");
+                        error = 1;
+                    }
+                    if (soloLetras(jtApellido.getText()) == true) {
+                        alumno.setApellido(jtApellido.getText());
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Error de tipio en la casilla APELLIDO");
+                        jtApellido.setText("");
+                        error = 1;
+                    }
+
+                    alumno.setDni(Integer.parseInt(jtDocumento.getText()));
+
+                    switch (jcEstado.getSelectedIndex()) {
+                        case 1:
+                            alumno.setEstado(true);
+                            break;
+                        case 2:
+                            alumno.setEstado(false);
+                            break;
+                    }
+
+                    alumno.setFechaNac(jdFechaNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                    
+                    if (error == 0) {
+                        alu.guardarAlumno(alumno);
+                        jtDocumento.setText("");
+                        jtNombre.setText("");
+                        jtApellido.setText("");
+                        jcEstado.setSelectedIndex(0);
+                        jdFechaNac.setDate(null);
+
+                    }
                 }
             }
-            if (repetido==0) {
-                Alumno alumno = new Alumno();
-                alumno.setNombre(jtNombre.getText());
-                alumno.setApellido(jtApellido.getText());
-                alumno.setDni(Integer.parseInt(jtDocumento.getText()));
-                switch (jcEstado.getSelectedIndex()) {
-                    case 1: alumno.setEstado(true);   break;
-                    case 2: alumno.setEstado(false);   break;
-               }
-               alumno.setFechaNac(jdFechaNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-               alu.guardarAlumno(alumno);
-            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese correctamente el DOCUMENTO");
+            jtDocumento.setText("");
         }
-         
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
         // TODO add your handling code here:
-          jtDocumento.setText("");
-            jtNombre.setText("");
-            jtApellido.setText("");
-            jcEstado.setSelectedIndex(0);
-            jdFechaNac.setDate(null);
+        jtDocumento.setText("");
+        jtNombre.setText("");
+        jtApellido.setText("");
+        jcEstado.setSelectedIndex(0);
+        jdFechaNac.setDate(null);
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListaActionPerformed
@@ -356,7 +398,7 @@ public class FormularioAlumno extends javax.swing.JFrame {
         ListadeAlumnos pantalla = new ListadeAlumnos();
         pantalla.setVisible(true);
         pantalla.setLocationRelativeTo(null);
-        
+
         this.dispose();
     }//GEN-LAST:event_jbListaActionPerformed
 
@@ -368,41 +410,6 @@ public class FormularioAlumno extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
-
-//            if (jtDocumento.getText().isEmpty()
-//            || jtNombre.getText().isEmpty()
-//            || jtApellido.getText().isEmpty()
-//            || jcEstado.getSelectedIndex() == 0
-//            || jdFechaNac.getDate() == null) {
-//            JOptionPane.showMessageDialog(this, "RELLENAME TODOS LOS CAMPO FLAC@!!");
-//        } else {
-//            AlumnoData alu = new AlumnoData();
-//            Alumno alumno = new Alumno();
-//            int registo = 0;
-//            for (Alumno student : alu.listarAlumnos()) {
-//                if (student.getDni() == Integer.parseInt(jtDocumento.getText())) {
-//                    alumno.setIdAlumno(student.getIdAlumno());
-//                    alumno.setNombre(jtNombre.getText());
-//                    alumno.setApellido(jtApellido.getText());
-//                    alumno.setDni(Integer.parseInt(jtDocumento.getText()));
-//                    switch (jcEstado.getSelectedIndex()) {
-//                        case 1:
-//                        alumno.setEstado(true);
-//                        break;
-//                        case 2:
-//                        alumno.setEstado(false);
-//                        break;
-//                    }
-//                    alumno.setFechaNac(jdFechaNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-//                    alu.modificarAlumno(alumno);
-//                    registo = 1;
-//                }
-//
-//            }
-//            if (registo == 0) {
-//                JOptionPane.showMessageDialog(this, "Solo se puede modificar alumnos anteriormente registrados");
-//            }
-//        }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -438,5 +445,13 @@ public class FormularioAlumno extends javax.swing.JFrame {
             setOpaque(false);
             super.paint(g);
         }
+    }
+
+    public static boolean soloLetras(String cadena) {
+
+        Pattern pattern = Pattern.compile("[0-9!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?]+");
+        Matcher matcher = pattern.matcher(cadena);
+
+        return !matcher.find();
     }
 }

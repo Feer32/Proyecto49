@@ -47,7 +47,7 @@ public class FormularioMateria extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "DATOS MATERIA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(0, 102, 0))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATOS MATERIA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 102, 0))); // NOI18N
         jPanel1.setOpaque(false);
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
@@ -107,9 +107,7 @@ public class FormularioMateria extends javax.swing.JFrame {
         jbBuscar.setBackground(new java.awt.Color(102, 204, 255));
         jbBuscar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jbBuscar.setForeground(new java.awt.Color(153, 204, 255));
-        jbBuscar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Estudiante\\Pictures\\imagenes proyec\\librito.png")); // NOI18N
         jbBuscar.setBorder(null);
-        jbBuscar.setOpaque(false);
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
@@ -119,7 +117,7 @@ public class FormularioMateria extends javax.swing.JFrame {
         jbLimpiar.setBackground(new java.awt.Color(153, 204, 255));
         jbLimpiar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jbLimpiar.setForeground(new java.awt.Color(0, 0, 0));
-        jbLimpiar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Estudiante\\Pictures\\imagenes proyec\\escobitaaaaa.png")); // NOI18N
+        jbLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/escobitaaaaa.png"))); // NOI18N
         jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbLimpiarActionPerformed(evt);

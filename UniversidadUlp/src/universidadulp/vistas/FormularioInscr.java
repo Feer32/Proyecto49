@@ -79,7 +79,7 @@ public class FormularioInscr extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "INSCRIPCIONES", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(0, 204, 204))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "INSCRIPCIONES", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 204, 204))); // NOI18N
         jPanel1.setOpaque(false);
 
         jLabel2.setFont(new java.awt.Font("Footlight MT Light", 1, 36)); // NOI18N
@@ -254,9 +254,8 @@ public class FormularioInscr extends javax.swing.JFrame {
 
         jbIconoBuscar.setBackground(new java.awt.Color(153, 204, 255));
         jbIconoBuscar.setForeground(new java.awt.Color(0, 0, 0));
-        jbIconoBuscar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Estudiante\\Pictures\\imagenes proyec\\LupaPers.png")); // NOI18N
+        jbIconoBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LupaPers.png"))); // NOI18N
         jbIconoBuscar.setBorder(null);
-        jbIconoBuscar.setOpaque(false);
         jbIconoBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbIconoBuscarActionPerformed(evt);

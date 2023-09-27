@@ -21,6 +21,7 @@ public class ListaMateria extends javax.swing.JFrame {
         rellenarLista();
         jbEliminar.setToolTipText("Permite Eliminar un Materia anteriormente seleccionado en la Lista");
         jbModificar.setToolTipText("Permite Modificar un Materia anteriormente seleccionado en la Lista");
+
     }
 
     public DefaultTableModel modelo = new DefaultTableModel() {
@@ -238,39 +239,46 @@ public class ListaMateria extends javax.swing.JFrame {
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
 
-        if (jtNombre.getText().isEmpty()
-                || jtAño.getText().isEmpty()
-                || jcEstado.getSelectedIndex() == 0
-                || jtListaMaterias.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(this, "Flac@ sseleccioname la materia porfis");
-        } else {
+        try {
+            if (jtNombre.getText().isEmpty()
+                    || jtAño.getText().isEmpty()
+                    || jcEstado.getSelectedIndex() == 0
+                    || jtListaMaterias.getSelectedRow() == -1) {
+                JOptionPane.showMessageDialog(this, "Flac@ sseleccioname la materia porfis");
+            } else {
 
-            int fila = jtListaMaterias.getSelectedRow();
+                int fila = jtListaMaterias.getSelectedRow();
 
-            int data = (Integer) modelo.getValueAt(fila, 0);
+                int data = (Integer) modelo.getValueAt(fila, 0);
 
-            for (Materia mate : materiadata.listarMaterias()) {
-                if (mate.getIdMateria() == data) {
-                    mate.setNombre(jtNombre.getText());
-                    mate.setAnio(Integer.parseInt(jtAño.getText()));
+                for (Materia mate : materiadata.listarMaterias()) {
+                    if (mate.getIdMateria() == data) {
+                        mate.setNombre(jtNombre.getText());
+                        mate.setAnio(Integer.parseInt(jtAño.getText()));
 
-                    mate.setIdMateria(data);
+                        mate.setIdMateria(data);
 
-                    switch (jcEstado.getSelectedIndex()) {
-                        case 1:
-                            mate.setActivo(true);
-                            break;
-                        case 2:
-                            mate.setActivo(false);
-                            break;
+                        switch (jcEstado.getSelectedIndex()) {
+                            case 1:
+                                mate.setActivo(true);
+                                break;
+                            case 2:
+                                mate.setActivo(false);
+                                break;
+                        }
+                        materiadata.modificarMateria(mate);
                     }
-                    materiadata.modificarMateria(mate);
                 }
+                borrarLista();
+                rellenarLista();
+                limpiar();
             }
-            borrarLista();
-            rellenarLista();
-            limpiar();
+        }catch(NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Porfavor ingrese solo numeros en el Año");
+            jtAño.setText("");
         }
+
+
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed

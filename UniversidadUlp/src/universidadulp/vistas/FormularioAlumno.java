@@ -4,6 +4,7 @@ import com.sun.source.tree.BreakTree;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
@@ -26,6 +27,12 @@ public class FormularioAlumno extends javax.swing.JFrame {
         jbLista.setToolTipText("Permite visualizar la lista de alumnos completa permitiendo modificar el que desee");
         jbNuevo.setToolTipText("Permite registrar un Alumno con los datos previamente ingresados en las casillas");
         jbLimpiar.setToolTipText("Flac@ el boton dice lo que hace");
+        jdFechaNac.getDateEditor().getUiComponent().setEnabled(false);
+        jdFechaNac.getDateEditor().getUiComponent().setOpaque(false);
+        jtCalendario.setEditable(false);
+        jtCalendario.setOpaque(false);
+//        jtCalendario.setBackground(colorCeleste);
+//        Color colorCeleste = new Color(173, 216, 230);
 
     }
 
@@ -33,7 +40,6 @@ public class FormularioAlumno extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -52,13 +58,12 @@ public class FormularioAlumno extends javax.swing.JFrame {
         jdFechaNac = new com.toedter.calendar.JDateChooser();
         jbLimpiar = new javax.swing.JButton();
         jbLista = new javax.swing.JButton();
-
-        jButton1.setText("jButton1");
+        jtCalendario = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), "DATOS ALUMNO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(0, 0, 153))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), "DATOS ALUMNO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 153))); // NOI18N
         jPanel1.setOpaque(false);
 
         jLabel1.setFont(new java.awt.Font("Footlight MT Light", 1, 36)); // NOI18N
@@ -137,11 +142,15 @@ public class FormularioAlumno extends javax.swing.JFrame {
         });
 
         jdFechaNac.setDateFormatString("dd MM yyyy");
+        jdFechaNac.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdFechaNacPropertyChange(evt);
+            }
+        });
 
         jbLimpiar.setBackground(new java.awt.Color(153, 204, 255));
         jbLimpiar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jbLimpiar.setForeground(new java.awt.Color(0, 0, 0));
-        jbLimpiar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Estudiante\\Pictures\\imagenes proyec\\escobitaaaaa.png")); // NOI18N
         jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbLimpiarActionPerformed(evt);
@@ -157,6 +166,9 @@ public class FormularioAlumno extends javax.swing.JFrame {
                 jbListaActionPerformed(evt);
             }
         });
+
+        jtCalendario.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jtCalendario.setBorder(null);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -174,14 +186,15 @@ public class FormularioAlumno extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jtDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-                                .addComponent(jtApellido)
-                                .addComponent(jtNombre))
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jdFechaNac, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                                .addComponent(jcEstado, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                            .addComponent(jtApellido)
+                            .addComponent(jtNombre)
+                            .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtCalendario))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addComponent(jbLista)))
@@ -218,10 +231,11 @@ public class FormularioAlumno extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jdFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)))
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel6)
+                            .addComponent(jdFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jtCalendario)))
                     .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -332,7 +346,7 @@ public class FormularioAlumno extends javax.swing.JFrame {
                 for (Alumno alumno : alu.listaCompletaDeAlumnos()) {
                     if (alumno.getDni() == Integer.parseInt(jtDocumento.getText())) {
                         JOptionPane.showMessageDialog(this, "No pueden existir alumnos con el mismo DOCUMENTO");
-                       jtDocumento.setText("");
+                        jtDocumento.setText("");
                         repetido = 1;
                     }
                 }
@@ -366,7 +380,7 @@ public class FormularioAlumno extends javax.swing.JFrame {
                     }
 
                     alumno.setFechaNac(jdFechaNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                    
+
                     if (error == 0) {
                         alu.guardarAlumno(alumno);
                         jtDocumento.setText("");
@@ -374,6 +388,7 @@ public class FormularioAlumno extends javax.swing.JFrame {
                         jtApellido.setText("");
                         jcEstado.setSelectedIndex(0);
                         jdFechaNac.setDate(null);
+                        jtCalendario.setText("");
 
                     }
                 }
@@ -410,9 +425,15 @@ public class FormularioAlumno extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jdFechaNacPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdFechaNacPropertyChange
+        if (jdFechaNac.getDate() != null) {
+            LocalDate fecha = jdFechaNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            jtCalendario.setText(fecha + "");
+
+    }//GEN-LAST:event_jdFechaNacPropertyChange
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -429,6 +450,7 @@ public class FormularioAlumno extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jcEstado;
     private com.toedter.calendar.JDateChooser jdFechaNac;
     private javax.swing.JTextField jtApellido;
+    private javax.swing.JTextField jtCalendario;
     private javax.swing.JTextField jtDocumento;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables

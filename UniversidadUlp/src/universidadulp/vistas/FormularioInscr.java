@@ -33,6 +33,7 @@ public class FormularioInscr extends javax.swing.JFrame {
         jbNota.setToolTipText("Permite modificar la nota de un Alumno inscripto previamente seleccionado");
         jbIconoBuscar.setToolTipText("Busca alumnos por DNI");
 
+
 //        crearCabecera();
     }
     public DefaultTableModel modelo = new DefaultTableModel() {

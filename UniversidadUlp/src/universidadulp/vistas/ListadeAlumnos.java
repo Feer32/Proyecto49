@@ -3,13 +3,17 @@ package universidadulp.vistas;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import universidadulp.Entidades.Alumno;
 import universidadulp.accesoADatos.AlumnoData;
+import static universidadulp.vistas.FormularioAlumno.soloLetras;
 
 public class ListadeAlumnos extends javax.swing.JFrame {
 
@@ -23,7 +27,10 @@ public class ListadeAlumnos extends javax.swing.JFrame {
         RellenarLista();
         jbEliminar.setToolTipText("Permite Eliminar un Alumno anteriormente seleccionado en la Lista");
         jbModificar.setToolTipText("Permite Modificar un Alumno anteriormente seleccionado en la Lista");
-
+        jdFechaNac.getDateEditor().getUiComponent().setEnabled(false);
+        jdFechaNac.getDateEditor().getUiComponent().setOpaque(false);
+        jtCalendario.setEditable(false);
+        jtCalendario.setOpaque(false);
     }
 
     AlumnoData aluData = new AlumnoData();
@@ -55,6 +62,7 @@ public class ListadeAlumnos extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jdFechaNac = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
+        jtCalendario = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -143,9 +151,18 @@ public class ListadeAlumnos extends javax.swing.JFrame {
         jLabel6.setText("Estado");
         jLabel6.setOpaque(true);
 
+        jdFechaNac.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdFechaNacPropertyChange(evt);
+            }
+        });
+
         jLabel3.setFont(new java.awt.Font("Footlight MT Light", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 153));
         jLabel3.setText("Lista de Alumnos");
+
+        jtCalendario.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jtCalendario.setBorder(null);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -181,8 +198,11 @@ public class ListadeAlumnos extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(275, 275, 275)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jdFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel5)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtCalendario)))))
                 .addContainerGap(39, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -215,7 +235,9 @@ public class ListadeAlumnos extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jdFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtCalendario))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbEliminar)
@@ -260,8 +282,8 @@ public class ListadeAlumnos extends javax.swing.JFrame {
     }//GEN-LAST:event_jbAtrasActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
-        int registro = 0;
         int fila = jtLista.getSelectedRow();
+        int error = 0;
         if (fila == -1) {
             JOptionPane.showMessageDialog(this, "Selecciona un alumno porfavor");
         } else {
@@ -281,12 +303,25 @@ public class ListadeAlumnos extends javax.swing.JFrame {
                 }
             } else {
                 AlumnoData alu = new AlumnoData();
-
+//                Alumno student = new Alumno();
                 for (Alumno student : alu.listaCompletaDeAlumnos()) {
                     if (student.getIdAlumno() == data) {
                         alumno.setIdAlumno(data);
-                        alumno.setNombre(jtNombre.getText());
-                        alumno.setApellido(jtApellido.getText());
+                        
+                        if (soloLetras(jtNombre.getText()) == true) {
+                            alumno.setNombre(jtNombre.getText());
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Error de tipeo en la casilla NOMBRE");
+                            jtNombre.setText("");
+                            error = 1;
+                        }
+                        if (soloLetras(jtApellido.getText()) == true) {
+                            alumno.setApellido(jtApellido.getText());
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Error de tipio en la casilla APELLIDO");
+                            jtApellido.setText("");
+                            error = 1;
+                        }
                         try {
                             if (Integer.parseInt(jtDocumento.getText()) != student.getDni()) {
                                 alumno.setDni(Integer.parseInt(jtDocumento.getText()));
@@ -294,10 +329,12 @@ public class ListadeAlumnos extends javax.swing.JFrame {
                                 alumno.setDni(student.getDni());
                             }
                         } catch (NumberFormatException e) {
+                            error = 1;
+                            System.out.println(error);
                             JOptionPane.showMessageDialog(this, "Por favor solo ingrese numeros en la casilla de DOCUMENTO");
                             jtDocumento.setText("");
-                            registro = 1;
                             break;
+                            
                         }
                         switch (jcEstado.getSelectedIndex()) {
                             case 1:
@@ -308,22 +345,27 @@ public class ListadeAlumnos extends javax.swing.JFrame {
                                 break;
                         }
                         alumno.setFechaNac(jdFechaNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                        alu.modificarAlumno(alumno);
+                        
 
                     }
-
+                    System.out.println(error);
+                    
                 }
-                if (registro == 0) {
-                    Borrarfila();
-                    RellenarLista();
-                    jtDocumento.setText("");
-                    jtNombre.setText("");
-                    jtApellido.setText("");
-                    jcEstado.setSelectedIndex(0);
-                    jdFechaNac.setDate(null);
+                if (error == 0) {
+                        alu.modificarAlumno(alumno);
+                        Borrarfila();
+                        RellenarLista();
+                        jtDocumento.setText("");
+                        jtNombre.setText("");
+                        jtApellido.setText("");
+                        jcEstado.setSelectedIndex(0);
+                        jdFechaNac.setDate(null);
+                        jtCalendario.setText("");
                 }
-                }
+                
             }
+        }
+
 
     }//GEN-LAST:event_jbModificarActionPerformed
 
@@ -346,6 +388,13 @@ public class ListadeAlumnos extends javax.swing.JFrame {
             jdFechaNac.setDate(Date.valueOf(alu.getFechaNac()));
         }
     }//GEN-LAST:event_jtListaMouseClicked
+
+    private void jdFechaNacPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdFechaNacPropertyChange
+        if (jdFechaNac.getDate() != null) {
+            LocalDate fecha = jdFechaNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            jtCalendario.setText(fecha + "");
+        }
+    }//GEN-LAST:event_jdFechaNacPropertyChange
     private void ArmarCabecera() {
         modelo.addColumn("ID");
         modelo.addColumn("DNI");
@@ -392,6 +441,7 @@ public class ListadeAlumnos extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jcEstado;
     private com.toedter.calendar.JDateChooser jdFechaNac;
     private javax.swing.JTextField jtApellido;
+    private javax.swing.JTextField jtCalendario;
     private javax.swing.JTextField jtDocumento;
     private javax.swing.JTable jtLista;
     private javax.swing.JTextField jtNombre;
@@ -409,5 +459,13 @@ public class ListadeAlumnos extends javax.swing.JFrame {
             setOpaque(false);
             super.paint(g);
         }
+    }
+
+    public static boolean soloLetras(String cadena) {
+
+        Pattern pattern = Pattern.compile("[0-9!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?]+");
+        Matcher matcher = pattern.matcher(cadena);
+
+        return !matcher.find();
     }
 }

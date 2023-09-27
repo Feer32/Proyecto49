@@ -11,6 +11,7 @@ public class Principal extends javax.swing.JFrame {
     Fondopantalla frame = new Fondopantalla();
     
     public Principal() {
+        this.setLocationRelativeTo(null);
         this.setContentPane(frame);
         initComponents();
         jbAlumno.setToolTipText("Puedes agregar y/o Modificar Alumno");
@@ -34,16 +35,19 @@ public class Principal extends javax.swing.JFrame {
         jbSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), "PROYECTO49", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 204, 255))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), "PROYECTO49", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(0, 204, 255))); // NOI18N
         jPanel1.setOpaque(false);
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Footlight MT Light", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 153, 204));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
         jLabel1.setText("  Universidad ULP");
 
+        jbAlumno.setBackground(new java.awt.Color(153, 204, 255));
         jbAlumno.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jbAlumno.setForeground(new java.awt.Color(0, 0, 0));
         jbAlumno.setText("ALUMNO ");
         jbAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -51,7 +55,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jbMateria.setBackground(new java.awt.Color(153, 204, 255));
         jbMateria.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jbMateria.setForeground(new java.awt.Color(0, 0, 0));
         jbMateria.setText("MATERIA");
         jbMateria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,7 +65,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jbAdminis.setBackground(new java.awt.Color(153, 204, 255));
         jbAdminis.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jbAdminis.setForeground(new java.awt.Color(0, 0, 0));
         jbAdminis.setText("ADMINISTRACIÓN");
         jbAdminis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,7 +75,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jbConsultas.setBackground(new java.awt.Color(153, 204, 255));
         jbConsultas.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jbConsultas.setForeground(new java.awt.Color(0, 0, 0));
         jbConsultas.setText("CONSULTAS");
         jbConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,7 +89,9 @@ public class Principal extends javax.swing.JFrame {
         jLabel2.setMaximumSize(new java.awt.Dimension(170, 207));
         jLabel2.setPreferredSize(new java.awt.Dimension(1125, 1022));
 
+        jbSalir.setBackground(new java.awt.Color(153, 204, 255));
         jbSalir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jbSalir.setForeground(new java.awt.Color(0, 0, 0));
         jbSalir.setText("SALIR");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

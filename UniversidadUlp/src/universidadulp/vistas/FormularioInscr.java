@@ -12,7 +12,6 @@ import universidadulp.Entidades.Materia;
 import universidadulp.accesoADatos.AlumnoData;
 import universidadulp.accesoADatos.InscripcionData;
 import universidadulp.accesoADatos.MateriaData;
-import universidadulp.vistas.Consulta.Fondopantalla;
 
 public class FormularioInscr extends javax.swing.JFrame {
 
@@ -28,6 +27,7 @@ public class FormularioInscr extends javax.swing.JFrame {
         llenarCombo();
         jrbMateriasInsc.setSelected(true);
         jbInscribir.setVisible(false);
+        jbIconoBuscar.setOpaque(false);
         jbInscribir.setToolTipText("Permite inscribir un Alumno en una materia previamente seleccionado");
         jbAnularInscripcion.setToolTipText("Permite quitar la inscripcion de un Alumno previamente seleccionado");
         jbNota.setToolTipText("Permite modificar la nota de un Alumno inscripto previamente seleccionado");
@@ -38,6 +38,7 @@ public class FormularioInscr extends javax.swing.JFrame {
     }
     public DefaultTableModel modelo = new DefaultTableModel() {
 
+        @Override
         public boolean isCellEditable(int fila, int columna) {
             return false;
         }
@@ -251,7 +252,11 @@ public class FormularioInscr extends javax.swing.JFrame {
         jLabel5.setText("BUSCAR POR DNI: ");
         jLabel5.setOpaque(true);
 
-        jbIconoBuscar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Estudiante\\Downloads\\magnifier-on-a-user_icon-icons.com_56923.png")); // NOI18N
+        jbIconoBuscar.setBackground(new java.awt.Color(153, 204, 255));
+        jbIconoBuscar.setForeground(new java.awt.Color(0, 0, 0));
+        jbIconoBuscar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Estudiante\\Pictures\\imagenes proyec\\LupaPers.png")); // NOI18N
+        jbIconoBuscar.setBorder(null);
+        jbIconoBuscar.setOpaque(false);
         jbIconoBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbIconoBuscarActionPerformed(evt);
@@ -279,7 +284,7 @@ public class FormularioInscr extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(jtfBucarDni, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jbIconoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jbIconoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 14, Short.MAX_VALUE)
@@ -306,13 +311,13 @@ public class FormularioInscr extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jcSelecAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jtfBucarDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jbIconoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jbIconoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

@@ -26,6 +26,7 @@ public class ListaMateria extends javax.swing.JFrame {
 
     public DefaultTableModel modelo = new DefaultTableModel() {
 
+        @Override
         public boolean isCellEditable(int fila, int columna) {
             return false;
         }

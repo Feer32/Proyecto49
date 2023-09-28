@@ -6,7 +6,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import universidadulp.Entidades.Alumno;
+import universidadulp.Entidades.Inscripcion;
 import universidadulp.Entidades.Materia;
+import universidadulp.accesoADatos.InscripcionData;
 import universidadulp.accesoADatos.MateriaData;
 
 public class ListaMateria extends javax.swing.JFrame {
@@ -284,8 +287,15 @@ public class ListaMateria extends javax.swing.JFrame {
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         if (jtListaMaterias.getSelectedRow() != -1) {
+            InscripcionData inscData = new InscripcionData();
             int fila = jtListaMaterias.getSelectedRow();
             int id = (Integer) modelo.getValueAt(fila, 0);
+            for (Inscripcion  inscripcion : inscData.obtenerInscripciones()) {
+                if (inscripcion.getMateria().getIdMateria()==id) {
+                    inscData.eliminarInscripcionMateriaAlumno(inscripcion.getAlumno().getIdAlumno(), id);
+                    
+                }
+            }
             materiadata.eliminarMateria(id);
             borrarLista();
             rellenarLista();

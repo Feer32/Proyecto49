@@ -228,9 +228,7 @@ public class InscripcionData {
             ps.setInt(2, idMateria);
             int fila = ps.executeUpdate();
 
-            if (fila == 1) {
-                JOptionPane.showMessageDialog(null, " Se eliminó la inscripción a la materia");
-            }
+           
             ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla inscripción");

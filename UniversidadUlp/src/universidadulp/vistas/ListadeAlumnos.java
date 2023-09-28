@@ -7,12 +7,16 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.crypto.AEADBadTagException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import universidadulp.Entidades.Alumno;
+import universidadulp.Entidades.Inscripcion;
 import universidadulp.accesoADatos.AlumnoData;
+import universidadulp.accesoADatos.InscripcionData;
+import universidadulp.accesoADatos.MateriaData;
 import static universidadulp.vistas.FormularioAlumno.soloLetras;
 
 public class ListadeAlumnos extends javax.swing.JFrame {
@@ -265,11 +269,25 @@ public class ListadeAlumnos extends javax.swing.JFrame {
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         // TODO add your handling code here:
+        InscripcionData inscData = new InscripcionData();
         int fila = jtLista.getSelectedRow();
+        int id = (Integer) modelo.getValueAt(fila, 0);
+
         if (fila != -1) {
-            int id=(Integer) modelo.getValueAt(fila, 0);
+            for (Inscripcion inscripcion : inscData.obtenerInscripcionesPorAlumno(id)) {
+                if (id == inscripcion.getAlumno().getIdAlumno()) {
+                    inscData.eliminarInscripcionMateriaAlumno(id, inscripcion.getMateria().getIdMateria());
+                }
+            }
             aluData.eliminarAlumno(id);
             modelo.removeRow(fila);
+              jtDocumento.setText("");
+                    jtNombre.setText("");
+                    jtApellido.setText("");
+                    jcEstado.setSelectedIndex(0);
+                    jdFechaNac.setDate(null);
+                    jtCalendario.setText("");
+            
         } else {
             JOptionPane.showMessageDialog(this, "No haz seleccionado ningun Alumno");
         }
@@ -277,7 +295,7 @@ public class ListadeAlumnos extends javax.swing.JFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
-        
+
         FormularioAlumno pantalla = new FormularioAlumno();
         pantalla.setVisible(true);
         pantalla.setLocationRelativeTo(null);
@@ -311,7 +329,7 @@ public class ListadeAlumnos extends javax.swing.JFrame {
                 for (Alumno student : alu.listaCompletaDeAlumnos()) {
                     if (student.getIdAlumno() == data) {
                         alumno.setIdAlumno(data);
-                        
+
                         if (soloLetras(jtNombre.getText()) == true) {
                             alumno.setNombre(jtNombre.getText());
                         } else {
@@ -334,11 +352,11 @@ public class ListadeAlumnos extends javax.swing.JFrame {
                             }
                         } catch (NumberFormatException e) {
                             error = 1;
-                            
+
                             JOptionPane.showMessageDialog(this, "Por favor solo ingrese numeros en la casilla de DOCUMENTO");
                             jtDocumento.setText("");
                             break;
-                            
+
                         }
                         switch (jcEstado.getSelectedIndex()) {
                             case 1:
@@ -349,24 +367,22 @@ public class ListadeAlumnos extends javax.swing.JFrame {
                                 break;
                         }
                         alumno.setFechaNac(jdFechaNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                        
 
                     }
-                    
-                    
+
                 }
                 if (error == 0) {
-                        alu.modificarAlumno(alumno);
-                        Borrarfila();
-                        RellenarLista();
-                        jtDocumento.setText("");
-                        jtNombre.setText("");
-                        jtApellido.setText("");
-                        jcEstado.setSelectedIndex(0);
-                        jdFechaNac.setDate(null);
-                        jtCalendario.setText("");
+                    alu.modificarAlumno(alumno);
+                    Borrarfila();
+                    RellenarLista();
+                    jtDocumento.setText("");
+                    jtNombre.setText("");
+                    jtApellido.setText("");
+                    jcEstado.setSelectedIndex(0);
+                    jdFechaNac.setDate(null);
+                    jtCalendario.setText("");
                 }
-                
+
             }
         }
 
@@ -374,7 +390,7 @@ public class ListadeAlumnos extends javax.swing.JFrame {
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jtListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListaMouseClicked
-        
+
         int fila = jtLista.getSelectedRow();
         Alumno alu = new Alumno();
         int data = (Integer) modelo.getValueAt(fila, 0);

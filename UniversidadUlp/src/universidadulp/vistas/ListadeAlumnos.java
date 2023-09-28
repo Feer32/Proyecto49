@@ -267,7 +267,8 @@ public class ListadeAlumnos extends javax.swing.JFrame {
         // TODO add your handling code here:
         int fila = jtLista.getSelectedRow();
         if (fila != -1) {
-            aluData.eliminarAlumno((Integer) modelo.getValueAt(fila, 0));
+            int id=(Integer) modelo.getValueAt(fila, 0);
+            aluData.eliminarAlumno(id);
             modelo.removeRow(fila);
         } else {
             JOptionPane.showMessageDialog(this, "No haz seleccionado ningun Alumno");

@@ -220,7 +220,7 @@ public class AlumnoData {
 //    }
 
     public void eliminarAlumno(int id) {
-
+        System.out.println(id);
         try {
             String sql = "DELETE FROM `alumno` WHERE idAlumno = ? ";
             PreparedStatement ps = conexion.prepareStatement(sql);
